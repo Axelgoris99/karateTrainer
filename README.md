@@ -1,4 +1,4 @@
-# karatetrainer
+# Karate Trainer
 
 ## Project setup
 ```
