@@ -17,16 +17,16 @@ export default createStore({
     LOAD_TECHNIQUES(state, tech) {
       state.techniques = tech;
     },
-    ADD_SELECTED(state, s) {
-      state.selected.push(s);
+    SET_SELECTED(state, obj) {
+      state.selected[obj.numberTree] = obj.value;
     },
   },
   actions: {
     setTechniques({ commit }, tech) {
       commit("LOAD_TECHNIQUES", tech);
     },
-    setSelected({ commit }, s) {
-      commit("ADD_SELECTED", s);
+    setSelected({ commit }, obj) {
+      commit("SET_SELECTED", obj);
     },
   },
   modules: {},

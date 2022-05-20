@@ -18,10 +18,12 @@ export default {
   name: "techniqueComp",
   props: {
     options: Object,
+    number: Number,
   },
+  emits: ["updateValue"],
   methods: {
     handleUpdateValue(value) {
-      console.log(value);
+      this.$emit("updateValue", value, this.number);
     },
   },
 };

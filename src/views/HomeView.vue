@@ -16,7 +16,11 @@
       </p>
       <div v-for="n in count" :key="n">
         <span>Technique n°{{ n }}</span>
-        <treeSelect :options="options"></treeSelect>
+        <treeSelect
+          :options="options"
+          :number="n - 1"
+          @updateValue="updateValue"
+        ></treeSelect>
       </div>
       <h2>Génération ou Reset</h2>
       <n-space horizontal justify="center">
@@ -77,6 +81,7 @@ export default {
   computed: {
     ...mapGetters({
       techniques: "techniques",
+      selected: "selected",
     }),
     options() {
       var types = [];
@@ -113,6 +118,10 @@ export default {
         this.loading = false;
         this.affiche = true;
       }, 2000);
+    },
+    updateValue(value, numberTree) {
+      var obj = { value, numberTree };
+      this.$store.dispatch("setSelected", obj);
     },
     reset() {
       console.log("reset");
