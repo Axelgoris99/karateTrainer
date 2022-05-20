@@ -19,6 +19,17 @@ export default {
   props: {
     options: Object,
     number: Number,
+    reset: Boolean,
+  },
+  data() {
+    return {
+      values: [],
+    };
+  },
+  watch: {
+    reset() {
+      console.log("tet");
+    },
   },
   emits: ["updateValue"],
   methods: {

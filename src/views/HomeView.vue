@@ -24,10 +24,10 @@
       </div>
       <h2>Génération ou Reset</h2>
       <n-space horizontal justify="center">
-        <n-button :loading="loading" icon-placement="left" @click="handleClick">
+        <n-button :loading="loading" icon-placement="left" @click="generate">
           Générer
         </n-button>
-        <n-button strong type="warning" @click="reset">Reset !</n-button>
+        <n-button strong type="warning" @click="clear">Reset !</n-button>
       </n-space>
       <div v-if="affiche">
         <h2>Ecoute</h2>
@@ -112,6 +112,24 @@ export default {
     fetchAllData();
   },
   methods: {
+    generate() {
+      var selectedTech = [];
+      for (let i = 0; i < this.count; i++) {
+        if (!this.selected[i]) {
+          // If we have no techniques then we won't be able to select one
+          // so we say that all of them are still possible
+          selectedTech.push("all");
+        } else {
+          // otherwise, we just take one of the current technique
+          selectedTech.push(
+            this.selected[i][
+              [Math.floor(Math.random() * this.selected[i].length)]
+            ]
+          );
+        }
+      }
+      console.log(selectedTech);
+    },
     handleClick() {
       this.loading = true;
       setTimeout(() => {
@@ -123,8 +141,8 @@ export default {
       var obj = { value, numberTree };
       this.$store.dispatch("setSelected", obj);
     },
-    reset() {
-      console.log("reset");
+    clear() {
+      this.reset = !this.reset;
     },
   },
 };
