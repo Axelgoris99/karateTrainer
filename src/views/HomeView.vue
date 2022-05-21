@@ -9,6 +9,7 @@
         :min="0"
         placeholder="Nombre de Techniques"
       />
+      <n-divider />
       <h2>Choix de techniques spécifiques</h2>
       <p>
         Si aucun choix n'est fait pour une case alors une technique aléatoire
@@ -22,6 +23,7 @@
           @updateValue="updateValue"
         ></treeSelect>
       </div>
+      <n-divider />
       <h2>Génération ou Reset</h2>
       <n-space horizontal justify="center">
         <n-button :loading="loading" icon-placement="left" @click="generate">
@@ -29,31 +31,36 @@
         </n-button>
         <n-button strong type="warning" @click="clear">Reset !</n-button>
       </n-space>
+      <n-divider />
       <div v-if="affiche">
         <h2>Ecoute</h2>
+        <n-divider />
+        <h2>Enchainement</h2>
+        <div style="overflow: auto">
+          <n-space horizontal justify="center">
+            <n-timeline>
+              <n-timeline-item
+                v-for="e in selectList"
+                :key="e.number"
+                :content="e.name"
+              />
+            </n-timeline>
+          </n-space>
+        </div>
+        <n-divider />
         <h2>Aide pour les techniques</h2>
         <n-card title="Techniques" style="margin-bottom: 16px">
           <n-space horizontal justify="center">
             <n-tabs type="line" animated>
-              <n-tab-pane name="Mawashi" tab="Mawashi">
+              <n-tab-pane
+                v-for="e in selectDesc"
+                :key="e"
+                :name="e.name"
+                :tab="e.name"
+              >
                 <n-space vertical>
-                  <span>Mawashi : Une petite description / Conseil</span>
+                  <span>{{ e.name }} : {{ e.desc }}</span>
                   <n-image :src="require('@/assets/mawashi.png')" />
-                </n-space>
-              </n-tab-pane>
-              <n-tab-pane name="Gyaku" tab="Gyaku">
-                <n-space vertical>
-                  <span>
-                    Gyaku : Une petite description / Conseil ou encore bien plus
-                    si affinités !</span
-                  >
-                  <n-image :src="require('@/assets/gyaku.png')" />
-                </n-space>
-              </n-tab-pane>
-              <n-tab-pane name="GedanBarai" tab="Gedan Barai">
-                <n-space vertical>
-                  <span>Gedan Barai : Une petite description / Conseil</span>
-                  <n-image :src="require('@/assets/gedan.jpg')" />
                 </n-space>
               </n-tab-pane>
             </n-tabs>
@@ -76,6 +83,8 @@ export default {
       loading: false,
       affiche: false,
       count: 3,
+      selectList: [],
+      selectDesc: [],
     };
   },
   computed: {
@@ -130,25 +139,34 @@ export default {
     fetchAllData();
   },
   methods: {
-    generate() {
+    techniquesSelection() {
+      var techExplanation = [];
       var selectedTech = [];
+      var sel;
       for (let i = 0; i < this.count; i++) {
-        if (!this.selected[i]) {
+        if (!this.selected[i] || this.selected[i].length == 0) {
           // If we have no techniques then we won't be able to select one
           // so we say that all of them are still possible
-          selectedTech.push(
-            this.techs[Math.floor(Math.random() * this.techs.length)]
-          );
+          sel = this.techs[Math.floor(Math.random() * this.techs.length)];
         } else {
-          // otherwise, we just take one of the current technique
-          selectedTech.push(
+          sel =
             this.selected[i][
               [Math.floor(Math.random() * this.selected[i].length)]
-            ]
-          );
+            ];
         }
+        if (!techExplanation.includes(sel)) {
+          techExplanation.push(sel);
+        }
+        selectedTech.push({ name: sel.name, number: i });
       }
-      console.log(selectedTech);
+      this.selectList = selectedTech;
+      this.selectDesc = techExplanation;
+    },
+    generate() {
+      this.loading = true;
+      this.techniquesSelection();
+      this.affiche = true;
+      this.loading = false;
     },
     handleClick() {
       this.loading = true;
@@ -162,6 +180,7 @@ export default {
       this.$store.dispatch("setSelected", obj);
     },
     clear() {
+      this.$store.dispatch("unsetSelected");
       this.reset = !this.reset;
     },
   },
