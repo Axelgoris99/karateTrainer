@@ -107,6 +107,24 @@ export default {
       }
       return types;
     },
+    techs() {
+      var arrayOfTechs = [];
+      for (let [key, value] of Object.entries(this.techniques)) {
+        key;
+        for (let [key1, value1] of Object.entries(value)) {
+          key1;
+          if (key1 == "pieds" || key1 == "poings") {
+            for (let [key2, value2] of Object.entries(value1)) {
+              key2;
+              arrayOfTechs.push(value2);
+            }
+          } else {
+            arrayOfTechs.push(value1);
+          }
+        }
+      }
+      return arrayOfTechs;
+    },
   },
   created() {
     fetchAllData();
@@ -118,7 +136,9 @@ export default {
         if (!this.selected[i]) {
           // If we have no techniques then we won't be able to select one
           // so we say that all of them are still possible
-          selectedTech.push("all");
+          selectedTech.push(
+            this.techs[Math.floor(Math.random() * this.techs.length)]
+          );
         } else {
           // otherwise, we just take one of the current technique
           selectedTech.push(
