@@ -7,11 +7,12 @@ firebase.initializeApp(firebaseConfig);
 var database = getDatabase();
 const storage = firebase.storage();
 
-const fetchImageUrl = (race, gender, _class, number) => {
-  return storage
-    .ref()
-    .child(`icon/${race}/${gender}/${_class}/${number}.png`)
-    .getDownloadURL();
+const fetchImageUrl = (name) => {
+  return storage.ref().child(`images/${name}.png`).getDownloadURL();
+};
+
+const fetchSoundUrl = (name) => {
+  return storage.ref().child(`sounds/${name}.ogg`).getDownloadURL();
 };
 
 function fetchAllData() {
@@ -21,4 +22,4 @@ function fetchAllData() {
     }
   });
 }
-export { fetchImageUrl, fetchAllData };
+export { fetchImageUrl, fetchSoundUrl, fetchAllData };

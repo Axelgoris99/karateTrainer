@@ -26,14 +26,23 @@
       <n-divider />
       <h2>Génération ou Reset</h2>
       <n-space horizontal justify="center">
-        <n-button :loading="loading" icon-placement="left" @click="generate">
+        <n-button
+          strong
+          :loading="loading"
+          icon-placement="left"
+          @click="generate"
+          type="primary"
+        >
           Générer
         </n-button>
         <n-button strong type="warning" @click="clear">Reset !</n-button>
       </n-space>
-      <n-divider />
       <div v-if="affiche">
+        <n-divider />
         <h2>Ecoute</h2>
+        <n-button @click="playSound" strong type="primary">
+          Lancer l'enchainement
+        </n-button>
         <n-divider />
         <h2>Enchainement</h2>
         <div style="overflow: auto">
@@ -54,13 +63,14 @@
             <n-tabs type="line" animated>
               <n-tab-pane
                 v-for="e in selectDesc"
-                :key="e"
-                :name="e.name"
-                :tab="e.name"
+                :key="e.obj.name"
+                :name="e.obj.name"
+                :tab="e.obj.name"
               >
                 <n-space vertical>
-                  <span>{{ e.name }} : {{ e.desc }}</span>
-                  <n-image :src="require('@/assets/mawashi.png')" />
+                  <span>{{ e.obj.name }} : {{ e.obj.desc }}</span>
+                  <audio controls :src="e.sound" />
+                  <n-image width="100" :src="e.image" />
                 </n-space>
               </n-tab-pane>
             </n-tabs>
@@ -73,7 +83,11 @@
 
 <script>
 import treeSelect from "../components/treeSelect.vue";
-import { fetchAllData } from "../firebaseModel.js";
+import {
+  fetchAllData,
+  fetchImageUrl,
+  fetchSoundUrl,
+} from "../firebaseModel.js";
 import { mapGetters } from "vuex";
 export default {
   name: "HomeView",
@@ -140,41 +154,76 @@ export default {
   },
   methods: {
     techniquesSelection() {
-      var techExplanation = [];
-      var selectedTech = [];
+      this.selectDesc = [];
+      this.selectList = [];
       var sel;
-      for (let i = 0; i < this.count; i++) {
-        if (!this.selected[i] || this.selected[i].length == 0) {
-          // If we have no techniques then we won't be able to select one
-          // so we say that all of them are still possible
-          sel = this.techs[Math.floor(Math.random() * this.techs.length)];
-        } else {
-          sel =
-            this.selected[i][
-              [Math.floor(Math.random() * this.selected[i].length)]
-            ];
+      var sound;
+      var image;
+      const fillTechDesc = async () => {
+        for (let i = 0; i < this.count; i++) {
+          await new Promise((resolve) => {
+            sound = null;
+            image = null;
+            if (!this.selected[i] || this.selected[i].length == 0) {
+              // If we have no techniques then we won't be able to select one
+              // so we say that all of them are still possible
+              sel = this.techs[Math.floor(Math.random() * this.techs.length)];
+            } else {
+              sel =
+                this.selected[i][
+                  [Math.floor(Math.random() * this.selected[i].length)]
+                ];
+            }
+            resolve();
+          })
+            .then(() => fetchSoundUrl(sel.name))
+            .then((url) => {
+              sound = url;
+            })
+            .then(() => fetchImageUrl(sel.name))
+            .then((url) => {
+              image = url;
+            })
+            .catch(() => {
+              if (!sound) {
+                sound = require("../assets/error.ogg");
+              }
+              if (!image) {
+                image = require("../assets/logo.png");
+              }
+            })
+            .then(() => {
+              if (!this.selectDesc.some((e) => e.obj == sel)) {
+                this.selectDesc.push({
+                  obj: sel,
+                  sound: sound,
+                  image: image,
+                });
+              }
+              this.selectList.push({
+                name: sel.name,
+                number: i,
+              });
+            });
         }
-        if (!techExplanation.includes(sel)) {
-          techExplanation.push(sel);
-        }
-        selectedTech.push({ name: sel.name, number: i });
-      }
-      this.selectList = selectedTech;
-      this.selectDesc = techExplanation;
+      };
+      fillTechDesc();
     },
     generate() {
-      this.loading = true;
-      this.techniquesSelection();
-      this.affiche = true;
-      this.loading = false;
+      const promise1 = Promise.resolve();
+      promise1
+        .then(() => {
+          this.loading = true;
+        })
+        .then(() => {
+          this.techniquesSelection();
+        })
+        .then(() => {
+          this.affiche = true;
+          this.loading = false;
+        });
     },
-    handleClick() {
-      this.loading = true;
-      setTimeout(() => {
-        this.loading = false;
-        this.affiche = true;
-      }, 2000);
-    },
+    playSound() {},
     updateValue(value, numberTree) {
       var obj = { value, numberTree };
       this.$store.dispatch("setSelected", obj);
