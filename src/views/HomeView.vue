@@ -40,7 +40,7 @@
       <div v-if="affiche">
         <n-divider />
         <h2>Ecoute</h2>
-        <n-button @click="playSound" strong type="primary">
+        <n-button @click="playSound0" strong type="primary">
           Lancer l'enchainement
         </n-button>
         <n-divider />
@@ -101,6 +101,7 @@ export default {
       count: 3,
       selectList: [],
       selectDesc: [],
+      sounds: [],
     };
   },
   computed: {
@@ -158,6 +159,7 @@ export default {
     techniquesSelection() {
       this.selectDesc = [];
       this.selectList = [];
+      this.sounds = [];
       var sel;
       var sound;
       var image;
@@ -205,13 +207,16 @@ export default {
               this.selectList.push({
                 name: sel.name,
                 number: i,
-                sound: sound,
               });
-            })
-            .finally(() => this.playSound());
+              this.sounds.push({
+                sound,
+              });
+            });
         }
       };
-      fillTechDesc();
+      fillTechDesc().finally(() => {
+        this.playSound(0);
+      });
     },
     generate() {
       const promise1 = Promise.resolve();
@@ -227,17 +232,22 @@ export default {
           this.loading = false;
         });
     },
-    playSound() {
-      var src = [];
-      this.selectList.forEach((e) => {
-        src.push(e.sound);
-      });
-      var sound = new Howl({
-        src: src,
-        autoplay: true,
-        volume: 1,
-      });
-      sound.play();
+    playSound0() {
+      this.playSound(0);
+    },
+    playSound(i) {
+      const comp = this;
+      setTimeout(() => {
+        var s = new Howl({
+          src: [comp.sounds[i].sound],
+          autoplay: true,
+          volume: 1,
+        });
+        s.play();
+        if (i < comp.sounds.length - 1) {
+          comp.playSound(i + 1);
+        }
+      }, 1500);
     },
     updateValue(value, numberTree) {
       var obj = { value, numberTree };
