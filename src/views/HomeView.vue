@@ -89,6 +89,8 @@ import {
   fetchSoundUrl,
 } from "../firebaseModel.js";
 import { mapGetters } from "vuex";
+import { Howl } from "howler";
+
 export default {
   name: "HomeView",
   components: { treeSelect },
@@ -203,8 +205,10 @@ export default {
               this.selectList.push({
                 name: sel.name,
                 number: i,
+                sound: sound,
               });
-            });
+            })
+            .finally(() => this.playSound());
         }
       };
       fillTechDesc();
@@ -223,7 +227,18 @@ export default {
           this.loading = false;
         });
     },
-    playSound() {},
+    playSound() {
+      var src = [];
+      this.selectList.forEach((e) => {
+        src.push(e.sound);
+      });
+      var sound = new Howl({
+        src: src,
+        autoplay: true,
+        volume: 1,
+      });
+      sound.play();
+    },
     updateValue(value, numberTree) {
       var obj = { value, numberTree };
       this.$store.dispatch("setSelected", obj);
