@@ -6,17 +6,15 @@
   </n-button>
   <n-divider />
   <h2>Enchainement</h2>
-  <div style="overflow: auto">
-    <n-space horizontal justify="center">
-      <n-timeline>
-        <n-timeline-item
-          v-for="e in selectList"
-          :key="e.number"
-          :content="e.name"
-        />
-      </n-timeline>
-    </n-space>
-  </div>
+  <n-space horizontal justify="center">
+    <n-timeline>
+      <n-timeline-item
+        v-for="e in selectList"
+        :key="e.number"
+        :content="e.name"
+      />
+    </n-timeline>
+  </n-space>
   <n-divider />
   <h2>Aide pour les techniques</h2>
   <n-card title="Techniques" style="margin-bottom: 16px">
@@ -48,10 +46,10 @@ export default {
       selectList: "selectList",
     }),
   },
-  emits: ["playSound"],
+  emits: ["play"],
   methods: {
     playSound() {
-      this.$emit("playSound");
+      this.$emit("play", 0);
     },
   },
 };

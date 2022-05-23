@@ -93,6 +93,8 @@ export default createStore({
       commit("SET_SELECTED", { value: [], numberTree: 6 });
       commit("SET_SELECTED", { value: [], numberTree: 7 });
       commit("SET_SELECTED", { value: [], numberTree: 8 });
+      commit("CLEAR_SELECTEDDESC");
+      commit("CLEAR_SELECTEDLIST");
     },
     setCount({ commit }, val) {
       commit("SET_COUNT", val);

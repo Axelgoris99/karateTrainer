@@ -6,7 +6,7 @@
       <choiceTech />
       <genRes @show="show" @hide="hide" @play="playSound" />
       <div v-if="affiche">
-        <helpTech @playSound="playSound" />
+        <helpTech @play="playSound" />
       </div>
     </n-space>
   </div>
