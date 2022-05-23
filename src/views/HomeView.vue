@@ -51,7 +51,7 @@ export default {
       if (i < comp.sounds.length - 1) {
         setTimeout(() => {
           comp.playSound(i + 1);
-        }, 1200);
+        }, 1400);
       }
       // var duration;
       // const promise1 = Promise.resolve();
