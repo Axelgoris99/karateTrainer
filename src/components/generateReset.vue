@@ -98,14 +98,16 @@ export default {
             .then((url) => {
               sound = url;
             })
+            .catch(() => {
+              if (!sound) {
+                sound = require("../assets/error.ogg");
+              }
+            })
             .then(() => fetchImageUrl(sel.name))
             .then((url) => {
               image = url;
             })
             .catch(() => {
-              if (!sound) {
-                sound = require("../assets/error.ogg");
-              }
               if (!image) {
                 image = require("../assets/logo.png");
               }

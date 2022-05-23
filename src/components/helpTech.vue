@@ -29,7 +29,7 @@
           <n-space vertical>
             <span>{{ e.obj.name }} : {{ e.obj.desc }}</span>
             <audio controls :src="e.sound" />
-            <n-image width="100" :src="e.image" />
+            <n-image width="300" :src="e.image" />
           </n-space>
         </n-tab-pane>
       </n-tabs>
