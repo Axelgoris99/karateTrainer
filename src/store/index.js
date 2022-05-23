@@ -4,6 +4,9 @@ export default createStore({
   state: {
     techniques: {},
     selected: [],
+    count: 3,
+    listOfSelectedTechsWithDesc: [],
+    listOfSelectedTech: [],
   },
   getters: {
     techniques(state) {
@@ -11,6 +14,15 @@ export default createStore({
     },
     selected(state) {
       return state.selected;
+    },
+    nbTech(state) {
+      return state.count;
+    },
+    selectDesc(state) {
+      return state.listOfSelectedTechsWithDesc;
+    },
+    selectList(state) {
+      return state.listOfSelectedTech;
     },
   },
   mutations: {
@@ -69,6 +81,21 @@ export default createStore({
       }
       state.selected[obj.numberTree] = selectedTechs;
     },
+    SET_COUNT(state, val) {
+      state.count = val;
+    },
+    ADD_SELECTEDDESC(state, val) {
+      state.listOfSelectedTechsWithDesc.push(val);
+    },
+    ADD_SELECTEDLIST(state, val) {
+      state.listOfSelectedTech.push(val);
+    },
+    CLEAR_SELECTEDDESC(state) {
+      state.listOfSelectedTechsWithDesc = [];
+    },
+    CLEAR_SELECTEDLIST(state) {
+      state.listOfSelectedTech = [];
+    },
   },
   actions: {
     setTechniques({ commit }, tech) {
@@ -87,6 +114,21 @@ export default createStore({
       commit("SET_SELECTED", { value: [], numberTree: 6 });
       commit("SET_SELECTED", { value: [], numberTree: 7 });
       commit("SET_SELECTED", { value: [], numberTree: 8 });
+    },
+    setCount({ commit }, val) {
+      commit("SET_COUNT", val);
+    },
+    addTechDesc({ commit }, val) {
+      commit("ADD_SELECTEDDESC", val);
+    },
+    addTech({ commit }, val) {
+      commit("ADD_SELECTEDLIST", val);
+    },
+    clearTechDesc({ commit }) {
+      commit("CLEAR_SELECTEDDESC");
+    },
+    clearTech({ commit }) {
+      commit("CLEAR_SELECTEDLIST");
     },
   },
   modules: {},
