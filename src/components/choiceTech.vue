@@ -32,19 +32,7 @@ export default {
       for (let [key, value] of Object.entries(this.techniques)) {
         var children = [];
         for (let [key1, value1] of Object.entries(value)) {
-          if (key == "attaques") {
-            var treeFeet = [];
-            for (let [key2, value2] of Object.entries(value1)) {
-              treeFeet.push({ label: value2.name, key: key2 });
-            }
-            children.push({
-              label: key1.toUpperCase(),
-              key: key1,
-              children: treeFeet,
-            });
-          } else {
-            children.push({ label: value1.name, key: key1 });
-          }
+          children.push({ label: value1.name, key: key1 });
         }
         var tree = { label: key.toUpperCase(), key: key, children: children };
         types.push(tree);

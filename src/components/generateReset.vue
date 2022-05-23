@@ -38,14 +38,7 @@ export default {
         key;
         for (let [key1, value1] of Object.entries(value)) {
           key1;
-          if (key1 == "pieds" || key1 == "poings") {
-            for (let [key2, value2] of Object.entries(value1)) {
-              key2;
-              arrayOfTechs.push(value2);
-            }
-          } else {
-            arrayOfTechs.push(value1);
-          }
+          arrayOfTechs.push(value1);
         }
       }
       return arrayOfTechs;
