@@ -89,7 +89,7 @@ import {
   fetchSoundUrl,
 } from "../firebaseModel.js";
 import { mapGetters } from "vuex";
-import { Howl } from "howler";
+// import { Howl } from "howler";
 
 export default {
   name: "HomeView",
@@ -237,17 +237,31 @@ export default {
     },
     playSound(i) {
       const comp = this;
-      setTimeout(() => {
-        var s = new Howl({
-          src: [comp.sounds[i].sound],
-          autoplay: true,
-          volume: 1,
-        });
-        s.play();
-        if (i < comp.sounds.length - 1) {
+      var audio = new Audio(comp.sounds[i].sound);
+      audio.play();
+      if (i < comp.sounds.length - 1) {
+        setTimeout(() => {
           comp.playSound(i + 1);
-        }
-      }, 1500);
+        }, 1200);
+      }
+      // var duration;
+      // const promise1 = Promise.resolve();
+      // promise1
+      //   .then(() => {
+      //     var audio = new Audio(comp.sounds[i].sound);
+      //     audio.play();
+      //     audio.onloadedmetadata = () => {
+      //       duration = audio.duration;
+      //     };
+      //   })
+      //   .then(() => {
+      //     if (i < comp.sounds.length - 1) {
+      //       setTimeout(() => {
+      //         comp.playSound(i + 1);
+      //         console.log(duration);
+      //       }, duration);
+      //     }
+      //   });
     },
     updateValue(value, numberTree) {
       var obj = { value, numberTree };
