@@ -1,9 +1,13 @@
 import firebase from "firebase/compat/app";
+import { getAnalytics, logEvent } from "firebase/analytics";
 import "firebase/compat/storage";
 import { getDatabase, ref, onValue } from "firebase/database";
 import firebaseConfig from "./firebaseSettings.js";
 import store from "./store/index.js";
-firebase.initializeApp(firebaseConfig);
+const app = firebase.initializeApp(firebaseConfig);
+
+const analytics = getAnalytics(app);
+logEvent(analytics, "select_content");
 var database = getDatabase();
 const storage = firebase.storage();
 
