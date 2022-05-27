@@ -129,6 +129,7 @@ export default {
         }
       };
       fillTechDesc().finally(() => {
+        this.$store.dispatch("setHelpTech", this.selectDesc[0].obj.name);
         this.$emit("play", 0);
         this.$emit("show");
       });

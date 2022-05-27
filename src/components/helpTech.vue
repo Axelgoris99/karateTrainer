@@ -19,7 +19,13 @@
   <h2>Aide pour les techniques</h2>
   <n-card title="Techniques" style="margin-bottom: 16px">
     <n-space horizontal justify="center">
-      <n-tabs type="line" animated justify-content="space-evenly">
+      <n-tabs
+        type="line"
+        animated
+        justify-content="space-evenly"
+        :value="helpValue"
+        @update:value="helpValueChanged"
+      >
         <n-tab-pane
           v-for="e in selectDesc"
           :key="e.obj.name"
@@ -44,12 +50,16 @@ export default {
     ...mapGetters({
       selectDesc: "selectDesc",
       selectList: "selectList",
+      helpValue: "helpTech",
     }),
   },
   emits: ["play"],
   methods: {
     playSound() {
       this.$emit("play", 0);
+    },
+    helpValueChanged(val) {
+      this.$store.dispatch("setHelpTech", val);
     },
   },
 };

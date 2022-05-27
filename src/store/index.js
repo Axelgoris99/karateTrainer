@@ -12,6 +12,7 @@ export default createStore({
     listOfSelectedTechsWithDesc: [],
     // This one contains all of the techs that are going to be played!
     listOfSelectedTech: [],
+    helpTechValue: "",
   },
   getters: {
     techniques(state) {
@@ -34,6 +35,9 @@ export default createStore({
     },
     lvl(state) {
       return state.lvl;
+    },
+    helpTech(state) {
+      return state.helpTechValue;
     },
     tech: (state) => (techIndex) => {
       var tech;
@@ -140,6 +144,9 @@ export default createStore({
     SET_LVL(state, val) {
       state.lvl = val;
     },
+    SET_HELP_TECH(state, name) {
+      state.helpTechValue = name;
+    },
   },
   actions: {
     setTechniques({ commit }, tech) {
@@ -180,6 +187,9 @@ export default createStore({
     setLvl({ commit }, val) {
       commit("SET_LVL", val);
       commit("SET_TECH_LVL");
+    },
+    setHelpTech({ commit }, name) {
+      commit("SET_HELP_TECH", name);
     },
   },
   modules: {},
