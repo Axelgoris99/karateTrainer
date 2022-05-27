@@ -9,6 +9,13 @@
     </div>
     <n-divider />
     <lvl-selector />
+    <div>
+      <n-image
+        width="300"
+        src="https://electrical-engineering-solutions.com/static/gif/site_en_construction.gif
+"
+      />
+    </div>
   </div>
 </template>
 

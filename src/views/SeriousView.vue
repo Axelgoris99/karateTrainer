@@ -58,11 +58,9 @@ export default {
       const fillTechDesc = async () => {
         for (let i = 0; i < Object.keys(combo).length - 1; i++) {
           await new Promise((resolve) => {
-            console.log(combo);
             sound = null;
             image = null;
             sel = this.$store.getters.tech(combo[i]);
-            console.log(sel);
             resolve();
           })
             .then(() => fetchSoundUrl(sel.name))

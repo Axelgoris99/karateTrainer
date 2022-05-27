@@ -1,7 +1,6 @@
 import store from "../../store/index";
 import convertLvl from "./convertLvl";
 const grades = ["blanc", "jaune", "orange", "vert", "bleu", "marron", "noir"];
-
 function getList(name) {
   var obj = store.getters.sameTypeOfTechs(name);
   var array = [];
@@ -15,8 +14,14 @@ function getList(name) {
     key;
     array[convertLvl(value.lvl)].push(value);
   }
-  console.log(array);
-  return array;
+  var bigArray = [];
+  for (let val of array) {
+    for (let val2 of val) {
+      bigArray.push(val2);
+    }
+  }
+  console.log(bigArray);
+  return bigArray;
 }
 
 export default getList;

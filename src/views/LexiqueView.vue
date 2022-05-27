@@ -5,24 +5,16 @@
       <p>Ici, une pléthore de techniques avec description, image et son !</p>
     </div>
     <n-divider />
-    <n-list bordered>
-      <template #header> hhh </template>
-      <template #footer> fff </template>
-      <n-list-item>
-        <template #prefix>
-          <n-button>Prefix</n-button>
-        </template>
-        <template #suffix>
-          <n-button>Suffix</n-button>
-        </template>
-        <n-thing title="Thing" title-extra="extra" description="description">
-          Biu<br />
-          Biu<br />
-          Biu<br />
+    <n-list bordered v-for="e in techs" :key="e.name">
+      <template #header>
+        <h2>Début des {{ e.name }}</h2></template
+      >
+      <template #footer>
+        <h2>Fin des {{ e.name }}</h2></template
+      >
+      <n-list-item v-for="t in e.obj" :key="t.name">
+        <n-thing :title="t.name" :title-extra="t.lvl" :description="t.desc">
         </n-thing>
-      </n-list-item>
-      <n-list-item>
-        <n-thing title="Thing" title-extra="extra" description="description" />
       </n-list-item>
     </n-list>
   </div>
@@ -35,37 +27,40 @@ import getList from "../components/functions/getListOfTechs.js";
 export default {
   name: "lexiqueView",
   components: {},
+  data() {
+    return {
+      techs: {},
+    };
+  },
   computed: {
     ...mapGetters({
       techniques: "techniques",
     }),
     fist() {
-      console.log(getList("poings"));
       return getList("poings");
     },
-    foot() {
-      var array;
-
-      return array;
+    feet() {
+      return getList("pieds");
     },
     blocks() {
-      var array;
-
-      return array;
+      return getList("blocages");
     },
     positions() {
-      var array;
-
-      return array;
+      return getList("positions");
     },
     moves() {
-      var array;
-
-      return array;
+      return getList("deplacements");
     },
   },
-  created() {
-    this.fist;
+  mounted() {
+    this.techs = {
+      fists: { name: "Poings", obj: this.fist },
+      feet: { name: "Pieds", obj: this.feet },
+      blocks: { name: "Blocages", obj: this.blocks },
+      positions: { name: "Positions", obj: this.positions },
+      moves: { name: "Déplacements", obj: this.moves },
+    };
+    console.log(this.techs);
   },
 };
 </script>
