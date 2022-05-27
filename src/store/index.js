@@ -32,9 +32,9 @@ export default createStore({
     selectList(state) {
       return state.listOfSelectedTech;
     },
-    // lvl(state) {
-    //   return state.grades[state.lvl];
-    // },
+    lvl(state) {
+      return state.lvl;
+    },
     tech: (state) => (techIndex) => {
       var tech;
       loop1: for (let [key, value] of Object.entries(state.techniques)) {

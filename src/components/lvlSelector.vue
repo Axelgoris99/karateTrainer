@@ -8,17 +8,17 @@
       :tooltip="false"
       :min="0"
       :max="6"
-      :default-value="6"
+      :value="value"
     />
   </n-space>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "lvlSelector",
   data() {
     return {
-      value: 0,
       marks: {
         0: "Blanc",
         1: "Jaune",
@@ -29,6 +29,11 @@ export default {
         6: "Noir",
       },
     };
+  },
+  computed: {
+    ...mapGetters({
+      value: "lvl",
+    }),
   },
   methods: {
     changedLvl(val) {
