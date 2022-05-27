@@ -1,3 +1,4 @@
+import convertLvl from "../../components/functions/convertLvl";
 export default {
   state: {
     techniques: {},
@@ -22,6 +23,14 @@ export default {
     helpTech(state) {
       return state.helpTechValue;
     },
+    sameTypeOfTechs: (state) => (typeYouWant) => {
+      if (Object.prototype.hasOwnProperty.call(state.techniques, typeYouWant)) {
+        return state.techniques[typeYouWant];
+      } else {
+        return "";
+      }
+    },
+
     tech: (state) => (techIndex) => {
       var tech;
       loop1: for (let [key, value] of Object.entries(state.techniques)) {
@@ -45,30 +54,6 @@ export default {
       state.techniques = tech;
     },
     SET_TECH_LVL(state) {
-      const grades = [
-        "blanc",
-        "jaune",
-        "orange",
-        "vert",
-        "bleu",
-        "marron",
-        "noir",
-      ];
-      /*
-          Not sure about the efficiency of this one.
-          Might be able to do better using callbacks?
-          It's object so not sure but still need to look into it one day.
-          */
-      function convertLvl(color) {
-        var lvl;
-        loop: for (let i = 0; i < grades.length; i++) {
-          if (color == grades[i]) {
-            lvl = i;
-            break loop;
-          }
-        }
-        return lvl;
-      }
       for (let [key, value] of Object.entries(state.techniques)) {
         state.techniquesLvl[key] = {};
         for (let [key1, value1] of Object.entries(value)) {

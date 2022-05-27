@@ -1,3 +1,5 @@
+import convertLvl from "../../components/functions/convertLvl";
+
 export default {
   state: {
     combos: {},
@@ -16,26 +18,6 @@ export default {
       state.combos = combos;
     },
     SET_COMBOS_LVL(state, level) {
-      const grades = [
-        "blanc",
-        "jaune",
-        "orange",
-        "vert",
-        "bleu",
-        "marron",
-        "noir",
-      ];
-
-      function convertLvl(color) {
-        var lvl;
-        loop: for (let i = 0; i < grades.length; i++) {
-          if (color == grades[i]) {
-            lvl = i;
-            break loop;
-          }
-        }
-        return lvl;
-      }
       state.combosLvl = {};
       var i = 0;
       for (let [key, value] of Object.entries(state.combos)) {

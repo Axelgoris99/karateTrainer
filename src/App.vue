@@ -6,13 +6,18 @@
     <router-link to="/lexique">Lexique</router-link> |
     <router-link to="/about">A propos</router-link>
   </nav>
-  <router-view class="home" />
+  <router-view v-if="ready" class="home" />
 </template>
 
 <script>
 import { fetchAllData } from "./firebaseModel.js";
 export default {
   name: "app",
+  data() {
+    return {
+      ready: true,
+    };
+  },
   created() {
     fetchAllData();
   },
