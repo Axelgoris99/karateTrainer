@@ -8,6 +8,7 @@
       :tooltip="false"
       :min="0"
       :max="6"
+      :default-value="6"
     />
   </n-space>
 </template>

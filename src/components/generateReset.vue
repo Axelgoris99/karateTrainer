@@ -25,7 +25,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      techniques: "techniques",
+      techniques: "techniquesLvl",
       selected: "selected",
       selectDesc: "selectDesc",
       selectList: "selectList",

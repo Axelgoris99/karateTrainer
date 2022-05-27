@@ -24,7 +24,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      techniques: "techniques",
+      techniques: "techniquesLvl",
       count: "nbTech",
     }),
     options() {

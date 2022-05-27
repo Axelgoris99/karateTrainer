@@ -3,16 +3,22 @@ import { createStore } from "vuex";
 export default createStore({
   state: {
     techniques: {},
+    techniquesLvl: {},
     selected: [],
     count: 3,
-    grades: ["blanc", "jaune", "orange", "vert", "bleu", "marron", "noir"],
-    lvl: 0,
+    // grades: ["blanc", "jaune", "orange", "vert", "bleu", "marron", "noir"],
+    lvl: 6,
+    // The one with Descriptions filter duplicates
     listOfSelectedTechsWithDesc: [],
+    // This one contains all of the techs that are going to be played!
     listOfSelectedTech: [],
   },
   getters: {
     techniques(state) {
       return state.techniques;
+    },
+    techniquesLvl(state) {
+      return state.techniquesLvl;
     },
     selected(state) {
       return state.selected;
@@ -26,9 +32,9 @@ export default createStore({
     selectList(state) {
       return state.listOfSelectedTech;
     },
-    lvl(state) {
-      return state.grades[state.lvl];
-    },
+    // lvl(state) {
+    //   return state.grades[state.lvl];
+    // },
     tech: (state) => (techIndex) => {
       var tech;
       loop1: for (let [key, value] of Object.entries(state.techniques)) {
@@ -50,6 +56,40 @@ export default createStore({
   mutations: {
     LOAD_TECHNIQUES(state, tech) {
       state.techniques = tech;
+    },
+    SET_TECH_LVL(state) {
+      const grades = [
+        "blanc",
+        "jaune",
+        "orange",
+        "vert",
+        "bleu",
+        "marron",
+        "noir",
+      ];
+      /*
+      Not sure about the efficiency of this one.
+      Might be able to do better using callbacks?
+      It's object so not sure but still need to look into it one day.
+      */
+      function convertLvl(color) {
+        var lvl;
+        loop: for (let i = 0; i < grades.length; i++) {
+          if (color == grades[i]) {
+            lvl = i;
+            break loop;
+          }
+        }
+        return lvl;
+      }
+      for (let [key, value] of Object.entries(state.techniques)) {
+        state.techniquesLvl[key] = {};
+        for (let [key1, value1] of Object.entries(value)) {
+          if (convertLvl(value1.lvl) <= state.lvl) {
+            state.techniquesLvl[key][key1] = value1;
+          }
+        }
+      }
     },
     SET_SELECTED(state, obj) {
       // This is overly complicated but as everything it will do at first
@@ -104,6 +144,7 @@ export default createStore({
   actions: {
     setTechniques({ commit }, tech) {
       commit("LOAD_TECHNIQUES", tech);
+      commit("SET_TECH_LVL");
     },
     setSelected({ commit }, obj) {
       commit("SET_SELECTED", obj);
@@ -138,6 +179,7 @@ export default createStore({
     },
     setLvl({ commit }, val) {
       commit("SET_LVL", val);
+      commit("SET_TECH_LVL");
     },
   },
   modules: {},

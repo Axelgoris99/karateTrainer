@@ -1,6 +1,15 @@
 <template>
-  <div class="home">
+  <div>
     <n-space vertical>
+      <div>
+        <h1>Bienvenu sur votre coach personnel de karaté!</h1>
+        <p>
+          Ici, vous pouvez générer des enchainements de Kihon adapté à votre
+          niveau de manière aléatoire. Attention, certains seront plus durs que
+          d'autres!
+        </p>
+      </div>
+      <n-divider />
       <lvlSelector />
       <n-divider />
       <nbTech />
@@ -60,10 +69,6 @@ export default {
 };
 </script>
 <style lang="scss">
-.home {
-  margin-left: 5vw;
-  margin-right: 5vw;
-}
 .card-tabs .n-tabs-nav--bar-type {
   padding-left: 4px;
 }
