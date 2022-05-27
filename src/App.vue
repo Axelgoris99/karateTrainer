@@ -1,6 +1,9 @@
 <template>
   <nav>
     <router-link to="/">Accueil</router-link> |
+    <router-link to="/grades">Passage de Grades</router-link> |
+    <router-link to="/quiz">Quiz</router-link> |
+    <router-link to="/lexique">Lexique</router-link> |
     <router-link to="/about">A propos</router-link>
   </nav>
   <router-view />

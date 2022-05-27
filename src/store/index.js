@@ -5,6 +5,8 @@ export default createStore({
     techniques: {},
     selected: [],
     count: 3,
+    grades: ["blanc", "jaune", "orange", "vert", "bleu", "marron", "noir"],
+    lvl: 0,
     listOfSelectedTechsWithDesc: [],
     listOfSelectedTech: [],
   },
@@ -23,6 +25,26 @@ export default createStore({
     },
     selectList(state) {
       return state.listOfSelectedTech;
+    },
+    lvl(state) {
+      return state.grades[state.lvl];
+    },
+    tech: (state) => (techIndex) => {
+      var tech;
+      loop1: for (let [key, value] of Object.entries(state.techniques)) {
+        if (techIndex == key) {
+          tech = value;
+          break loop1;
+        } else {
+          for (let [key1, value1] of Object.entries(value)) {
+            if (techIndex == key1) {
+              tech = value1;
+              break loop1;
+            }
+          }
+        }
+      }
+      return tech;
     },
   },
   mutations: {
@@ -75,6 +97,9 @@ export default createStore({
     CLEAR_SELECTEDLIST(state) {
       state.listOfSelectedTech = [];
     },
+    SET_LVL(state, val) {
+      state.lvl = val;
+    },
   },
   actions: {
     setTechniques({ commit }, tech) {
@@ -110,6 +135,9 @@ export default createStore({
     },
     clearTech({ commit }) {
       commit("CLEAR_SELECTEDLIST");
+    },
+    setLvl({ commit }, val) {
+      commit("SET_LVL", val);
     },
   },
   modules: {},

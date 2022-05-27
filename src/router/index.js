@@ -17,6 +17,24 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
   },
   {
+    path: "/grades",
+    name: "grades",
+    component: () =>
+      import(/* webpackChunkName: "grades" */ "../views/SeriousView.vue"),
+  },
+  {
+    path: "/lexique",
+    name: "lexique",
+    component: () =>
+      import(/* webpackChunkName: "lexique" */ "../views/LexiqueView.vue"),
+  },
+  {
+    path: "/quiz",
+    name: "quiz",
+    component: () =>
+      import(/* webpackChunkName: "quiz" */ "../views/QuizView.vue"),
+  },
+  {
     path: "/:pathMatch(.*)*",
     component: HomeView,
   },
