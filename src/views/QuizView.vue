@@ -1,13 +1,13 @@
 <template>
   <div>
     <div>
-      <h1>Bienvenu sur votre coach personnel de karaté!</h1>
+      <h1>Quiz Time !</h1>
       <p>
-        Ici, vous pouvez générer des enchainements de Kihon adapté à votre
-        niveau de manière aléatoire. Attention, certains seront plus durs que
-        d'autres!
+        Ici, vous pouvez apprendre des techniques en vous amusant! Un score
+        ainsi qu'un "palmarès" sera potentiellement ajouté.
       </p>
     </div>
+    <n-divider />
     <lvl-selector />
   </div>
 </template>

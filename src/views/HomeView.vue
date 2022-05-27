@@ -29,7 +29,6 @@ import choiceTech from "../components/choiceTech.vue";
 import genRes from "../components/generateReset.vue";
 import helpTech from "../components/helpTech.vue";
 import lvlSelector from "../components/lvlSelector.vue";
-import { fetchAllData } from "../firebaseModel.js";
 import { mapGetters } from "vuex";
 
 export default {
@@ -44,9 +43,6 @@ export default {
     ...mapGetters({
       sounds: "selectList",
     }),
-  },
-  created() {
-    fetchAllData();
   },
   methods: {
     show() {

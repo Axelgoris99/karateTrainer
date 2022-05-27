@@ -1,22 +1,17 @@
 <template>
   <div>
     <div>
-      <h1>Bienvenu sur votre coach personnel de karaté!</h1>
-      <p>
-        Ici, vous pouvez générer des enchainements de Kihon adapté à votre
-        niveau de manière aléatoire. Attention, certains seront plus durs que
-        d'autres!
-      </p>
+      <h1>Lexique des techniques!</h1>
+      <p>Ici, une pléthore de techniques avec description, image et son !</p>
     </div>
-    <lvl-selector />
+    <n-divider />
   </div>
 </template>
 
 <script>
-import lvlSelector from "../components/lvlSelector.vue";
 export default {
   name: "lexiqueView",
-  components: { lvlSelector },
+  components: {},
 };
 </script>
 

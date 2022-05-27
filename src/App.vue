@@ -9,6 +9,15 @@
   <router-view class="home" />
 </template>
 
+<script>
+import { fetchAllData } from "./firebaseModel.js";
+export default {
+  name: "app",
+  created() {
+    fetchAllData();
+  },
+};
+</script>
 <style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

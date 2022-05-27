@@ -25,5 +25,10 @@ function fetchAllData() {
       store.dispatch("setTechniques", snapshot.val());
     }
   });
+  onValue(ref(database, "/enchainements"), (snapshot) => {
+    if (snapshot.val()) {
+      store.dispatch("setCombos", snapshot.val());
+    }
+  });
 }
 export { fetchImageUrl, fetchSoundUrl, fetchAllData };
