@@ -19,12 +19,12 @@
   <h2>Aide pour les techniques</h2>
   <n-card title="Techniques" style="margin-bottom: 16px">
     <n-space horizontal justify="center">
-      <n-tabs type="line" animated @add="handleAdd">
+      <n-tabs type="line" animated justify-content="space-evenly">
         <n-tab-pane
           v-for="e in selectDesc"
           :key="e.obj.name"
           :name="e.obj.name"
-          :tab="e.obj.name"
+          :tab="`ㅤ${e.obj.name}ㅤ`"
         >
           <n-space vertical class="size">
             <span>{{ e.obj.name }} : {{ e.obj.desc }}</span>
@@ -51,15 +51,13 @@ export default {
     playSound() {
       this.$emit("play", 0);
     },
-    handleAdd() {
-      console.log("test");
-    },
   },
 };
 </script>
 
 <style scoped>
 .size {
+  text-align: center;
   width: 80vw;
 }
 </style>
