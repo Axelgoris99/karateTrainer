@@ -100,9 +100,10 @@ export default {
       commit("SET_COUNT", val);
     },
 
-    setLvl({ commit }, val) {
+    setLvl({ commit, dispatch }, val) {
       commit("SET_LVL", val);
       commit("SET_TECH_LVL");
+      dispatch("setCombosLvl");
     },
     setHelpTech({ commit }, name) {
       commit("SET_HELP_TECH", name);
