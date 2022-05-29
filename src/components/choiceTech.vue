@@ -42,7 +42,6 @@ export default {
   },
   methods: {
     updateValue(value, numberTree) {
-      // console.log(this.$store.getters.tech(value));
       var obj = { value, numberTree };
       this.$store.dispatch("setSelected", obj);
     },

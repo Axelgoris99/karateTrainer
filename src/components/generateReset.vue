@@ -14,7 +14,6 @@
   </n-space>
 </template>
 <script>
-import { fetchImageUrl, fetchSoundUrl } from "../firebaseModel.js";
 import { mapGetters } from "vuex";
 export default {
   name: "genRes",
@@ -70,13 +69,9 @@ export default {
       this.$store.dispatch("clearTech");
       this.$store.dispatch("clearTechDesc");
       var sel;
-      var sound;
-      var image;
       const fillTechDesc = async () => {
         for (let i = 0; i < this.count; i++) {
           await new Promise((resolve) => {
-            sound = null;
-            image = null;
             if (!this.selected[i] || this.selected[i].length == 0) {
               // If we have no techniques then we won't be able to select one
               // so we say that all of them are still possible
@@ -93,39 +88,21 @@ export default {
                 ];
             }
             resolve();
-          })
-            .then(() => fetchSoundUrl(sel.name))
-            .then((url) => {
-              sound = url;
-            })
-            .catch(() => {
-              if (!sound) {
-                sound = require("../assets/error.ogg");
-              }
-            })
-            .then(() => fetchImageUrl(sel.name))
-            .then((url) => {
-              image = url;
-            })
-            .catch(() => {
-              if (!image) {
-                image = require("../assets/logo.png");
-              }
-            })
-            .then(() => {
-              if (!this.selectDesc.some((e) => e.obj == sel)) {
-                this.$store.dispatch("addTechDesc", {
-                  obj: sel,
-                  sound: sound,
-                  image: image,
-                });
-              }
-              this.$store.dispatch("addTech", {
-                name: sel.name,
-                number: i,
-                sound: sound,
+          }).then(() => {
+            console.log("sel", sel);
+            if (!this.selectDesc.some((e) => e.obj.name == sel.name)) {
+              this.$store.dispatch("addTechDesc", {
+                obj: { desc: sel.desc, lvl: sel.lvl, name: sel.name },
+                sound: sel.sound,
+                image: sel.image,
               });
+            }
+            this.$store.dispatch("addTech", {
+              name: sel.name,
+              number: i,
+              sound: sel.sound,
             });
+          });
         }
       };
       fillTechDesc().finally(() => {

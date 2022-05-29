@@ -14,6 +14,11 @@
       >
       <n-list-item v-for="t in e.obj" :key="t.name">
         <n-thing :title="t.name" :title-extra="t.lvl" :description="t.desc">
+          <n-image :src="t.img" />
+          {{ t.img }}
+          <audio controls>
+            <source :src="t.son" />
+          </audio>
         </n-thing>
       </n-list-item>
     </n-list>
@@ -60,7 +65,6 @@ export default {
       positions: { name: "Positions", obj: this.positions },
       moves: { name: "Déplacements", obj: this.moves },
     };
-    console.log(this.techs);
   },
 };
 </script>
