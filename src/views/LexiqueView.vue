@@ -9,41 +9,50 @@
       <h2>Légende</h2>
       <n-space horizontal justify="center">
         <n-space vertical justify="center" v-for="b in grades" :key="b">
-          <n-image :src="require('../assets/Belt/' + b + '.svg')" width="150" />
+          <n-image
+            :src="require('../assets/Belt/' + b + '.svg')"
+            width="150"
+            preview-disabled
+          />
           <span style="text-transform: capitalize">{{ b }} </span>
         </n-space>
       </n-space>
     </div>
     <n-divider />
     <n-list v-for="e in techs" :key="e.name">
-      <template #header>
-        <h2>Début des {{ e.name }}</h2></template
-      >
-      <template #footer>
-        <h2>Fin des {{ e.name }}</h2>
-        <n-divider />
-      </template>
-      <n-list-item v-for="t in e.obj" :key="t.name">
-        <n-thing>
-          <template #header
-            ><h2>{{ t.name }}</h2></template
-          >
-          <template #header-extra>
-            ><n-image
-              :src="require('../assets/Belt/' + t.lvl + '.svg')"
-              width="100"
-            />
+      <n-collapse arrow-placement="right">
+        <n-collapse-item :name="e.name">
+          <template #header>
+            <h2>{{ e.name }}</h2>
           </template>
-          <template #description
-            ><p>Description <br />{{ t.desc }}</p>
-            <n-space vertical justify="center">
-              <n-image :src="t.image" width="150" />
-              <audio controls>
-                <source :src="t.sound" />
-              </audio> </n-space
-          ></template>
-        </n-thing>
-      </n-list-item>
+          <n-list-item v-for="t in e.obj" :key="t.name">
+            <n-collapse arrow-placement="right">
+              <n-collapse-item :title="t.name" :name="t.name">
+                <template #header
+                  ><h3>{{ t.name }}</h3></template
+                >
+                <template #header-extra>
+                  <n-image
+                    :src="require('../assets/Belt/' + t.lvl + '.svg')"
+                    width="100"
+                    preview-disabled
+                  />
+                </template>
+                <n-thing>
+                  <template #description
+                    ><p>{{ t.desc }}</p>
+                    <n-space vertical justify="center">
+                      <n-image :src="t.image" width="150" />
+                      <audio controls>
+                        <source :src="t.sound" />
+                      </audio> </n-space
+                  ></template>
+                </n-thing>
+              </n-collapse-item>
+            </n-collapse>
+          </n-list-item>
+        </n-collapse-item>
+      </n-collapse>
     </n-list>
   </div>
 </template>
