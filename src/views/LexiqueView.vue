@@ -5,20 +5,22 @@
       <p>Ici, une pléthore de techniques avec description, image et son !</p>
     </div>
     <n-divider />
-    <n-list bordered v-for="e in techs" :key="e.name">
+    <n-list v-for="e in techs" :key="e.name">
       <template #header>
         <h2>Début des {{ e.name }}</h2></template
       >
       <template #footer>
-        <h2>Fin des {{ e.name }}</h2></template
-      >
+        <h2>Fin des {{ e.name }}</h2>
+        <n-divider />
+      </template>
       <n-list-item v-for="t in e.obj" :key="t.name">
         <n-thing :title="t.name" :title-extra="t.lvl" :description="t.desc">
-          <n-image :src="t.img" />
-          {{ t.img }}
-          <audio controls>
-            <source :src="t.son" />
-          </audio>
+          <n-space vertical justify="center">
+            <n-image :src="t.image" width="100" />
+            <audio controls>
+              <source :src="t.sound" />
+            </audio>
+          </n-space>
         </n-thing>
       </n-list-item>
     </n-list>

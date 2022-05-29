@@ -1,7 +1,7 @@
 import firebase from "firebase/compat/app";
 import { getAnalytics, logEvent } from "firebase/analytics";
 import "firebase/compat/storage";
-import { getDatabase, ref, onValue } from "firebase/database";
+import { getDatabase, ref, onValue, get } from "firebase/database";
 import firebaseConfig from "./firebaseSettings.js";
 import store from "./store/index.js";
 const app = firebase.initializeApp(firebaseConfig);
@@ -20,7 +20,7 @@ const fetchSoundUrl = (name) => {
 };
 
 function fetchAllData() {
-  onValue(ref(database, "/techniques"), (snapshot) => {
+  get(ref(database, "/techniques")).then((snapshot) => {
     if (snapshot.val()) {
       var promises = [];
       var val = { ...snapshot.val() };
