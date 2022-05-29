@@ -25,7 +25,6 @@
 <script>
 import lvlSelector from "../components/lvlSelector.vue";
 import helpTech from "../components/helpTech.vue";
-import { fetchImageUrl, fetchSoundUrl } from "../firebaseModel.js";
 import { mapGetters } from "vuex";
 
 export default {
@@ -49,8 +48,6 @@ export default {
       this.$store.dispatch("clearTech");
       this.$store.dispatch("clearTechDesc");
       var sel;
-      var sound;
-      var image;
       var combo =
         this.combos[
           Math.floor(Math.random() * Object.keys(this.combos).length)
@@ -58,47 +55,19 @@ export default {
       const fillTechDesc = async () => {
         for (let i = 0; i < Object.keys(combo).length - 1; i++) {
           await new Promise((resolve) => {
-            sound = null;
-            image = null;
             sel = this.$store.getters.tech(combo[i]);
             resolve();
-          })
-            .then(() => fetchSoundUrl(sel.name))
-            .then((url) => {
-              sound = url;
-            })
-            .catch(() => {
-              if (!sound) {
-                sound = require("../assets/error.ogg");
-              }
-            })
-            .then(() => fetchImageUrl(sel.name))
-            .then((url) => {
-              image = url;
-            })
-            .catch(() => {
-              if (!image) {
-                image = require("../assets/logo.png");
-              }
-            })
-            .then(() => {
-              if (!this.selectDesc.some((e) => e.obj == sel)) {
-                this.$store.dispatch("addTechDesc", {
-                  obj: sel,
-                  sound: sound,
-                  image: image,
-                });
-              }
-              this.$store.dispatch("addTech", {
-                name: sel.name,
-                number: i,
-                sound: sound,
-              });
-            });
+          }).then(() => {
+            if (!this.selectDesc.some((e) => e.name == sel.name)) {
+              this.$store.dispatch("addTechDesc", sel);
+            }
+            var obj = { ...sel, ...{ number: i } };
+            this.$store.dispatch("addTech", obj);
+          });
         }
       };
       fillTechDesc().finally(() => {
-        this.$store.dispatch("setHelpTech", this.selectDesc[0].obj.name);
+        this.$store.dispatch("setHelpTech", this.selectDesc[0].name);
         this.playSound(0);
         this.$emit("show");
       });

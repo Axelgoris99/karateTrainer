@@ -89,24 +89,16 @@ export default {
             }
             resolve();
           }).then(() => {
-            console.log("sel", sel);
-            if (!this.selectDesc.some((e) => e.obj.name == sel.name)) {
-              this.$store.dispatch("addTechDesc", {
-                obj: { desc: sel.desc, lvl: sel.lvl, name: sel.name },
-                sound: sel.sound,
-                image: sel.image,
-              });
+            if (!this.selectDesc.some((e) => e.name == sel.name)) {
+              this.$store.dispatch("addTechDesc", sel);
             }
-            this.$store.dispatch("addTech", {
-              name: sel.name,
-              number: i,
-              sound: sel.sound,
-            });
+            var obj = { ...sel, ...{ number: i } };
+            this.$store.dispatch("addTech", obj);
           });
         }
       };
       fillTechDesc().finally(() => {
-        this.$store.dispatch("setHelpTech", this.selectDesc[0].obj.name);
+        this.$store.dispatch("setHelpTech", this.selectDesc[0].name);
         this.$emit("play", 0);
         this.$emit("show");
       });

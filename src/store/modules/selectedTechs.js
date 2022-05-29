@@ -30,25 +30,19 @@ export default {
               If no, one level deeper, so on and so forth.
               Could have made it recursive.
             */
-      console.log(listObj);
       var techniques = listObj[0];
       var obj = listObj[1];
       var selectedTechs = [];
       for (let i = 0; i < obj.value.length; i++) {
-        console.log(i);
-        console.log(techniques);
         for (let [key, value] of Object.entries(techniques)) {
-          console.log(value);
           if (key == obj.value[i]) {
             for (let [key1, value1] of Object.entries(value)) {
               key1;
-              console.log(value1);
               selectedTechs.push(value1);
             }
           } else {
             for (let [key1, value1] of Object.entries(value)) {
               if (key1 == obj.value[i]) {
-                console.log(value1);
                 selectedTechs.push(value1);
               }
             }

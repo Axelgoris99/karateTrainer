@@ -28,12 +28,12 @@
       >
         <n-tab-pane
           v-for="e in selectDesc"
-          :key="e.obj.name"
-          :name="e.obj.name"
-          :tab="`ㅤ${e.obj.name}ㅤ`"
+          :key="e.name"
+          :name="e.name"
+          :tab="`ㅤ${e.name}ㅤ`"
         >
           <n-space vertical class="size">
-            <span>{{ e.obj.name }} : {{ e.obj.desc }}</span>
+            <span>{{ e.name }} : {{ e.desc }}</span>
             <audio controls :src="e.sound" />
             <n-image width="300" :src="e.image" />
           </n-space>

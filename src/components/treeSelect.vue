@@ -28,7 +28,7 @@ export default {
   },
   watch: {
     reset() {
-      // console.log("tet");
+      // ("tet");
     },
   },
   emits: ["updateValue"],

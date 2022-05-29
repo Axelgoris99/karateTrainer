@@ -20,7 +20,6 @@ function getList(name) {
       bigArray.push(val2);
     }
   }
-  console.log(bigArray);
   return bigArray;
 }
 
