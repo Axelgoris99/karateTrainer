@@ -5,6 +5,16 @@
       <p>Ici, une pléthore de techniques avec description, image et son !</p>
     </div>
     <n-divider />
+    <div>
+      <h2>Légende</h2>
+      <n-space horizontal justify="center">
+        <n-space vertical justify="center" v-for="b in grades" :key="b">
+          <n-image :src="require('../assets/Belt/' + b + '.svg')" width="150" />
+          <span style="text-transform: capitalize">{{ b }} </span>
+        </n-space>
+      </n-space>
+    </div>
+    <n-divider />
     <n-list v-for="e in techs" :key="e.name">
       <template #header>
         <h2>Début des {{ e.name }}</h2></template
@@ -14,13 +24,24 @@
         <n-divider />
       </template>
       <n-list-item v-for="t in e.obj" :key="t.name">
-        <n-thing :title="t.name" :title-extra="t.lvl" :description="t.desc">
-          <n-space vertical justify="center">
-            <n-image :src="t.image" width="100" />
-            <audio controls>
-              <source :src="t.sound" />
-            </audio>
-          </n-space>
+        <n-thing>
+          <template #header
+            ><h2>{{ t.name }}</h2></template
+          >
+          <template #header-extra>
+            ><n-image
+              :src="require('../assets/Belt/' + t.lvl + '.svg')"
+              width="100"
+            />
+          </template>
+          <template #description
+            ><p>Description <br />{{ t.desc }}</p>
+            <n-space vertical justify="center">
+              <n-image :src="t.image" width="150" />
+              <audio controls>
+                <source :src="t.sound" />
+              </audio> </n-space
+          ></template>
         </n-thing>
       </n-list-item>
     </n-list>
@@ -36,6 +57,7 @@ export default {
   components: {},
   data() {
     return {
+      grades: ["blanc", "jaune", "orange", "vert", "bleu", "marron", "noir"],
       techs: {},
     };
   },
