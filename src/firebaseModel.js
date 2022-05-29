@@ -38,7 +38,9 @@ function fetchAllData() {
           promises.push(promiseImage);
         }
       }
-      Promise.all(promises).then(() => store.dispatch("setTechniques", val));
+      Promise.all(promises).then(() => {
+        store.dispatch("setTechniques", val);
+      });
     }
   });
   onValue(ref(database, "/enchainements"), (snapshot) => {

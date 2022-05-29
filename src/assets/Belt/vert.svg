@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2 (dc2aedaf03, 2022-05-15)"
+   sodipodi:docname="vert.svg"
+   inkscape:export-filename="ceinture.svg"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <title
+     id="title3591">CeintureEnroule</title>
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.52724989"
+     inkscape:cx="-220.95785"
+     inkscape:cy="498.81471"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient10187">
+      <stop
+         style="stop-color:#0fb600;stop-opacity:1;"
+         offset="0"
+         id="stop10183" />
+      <stop
+         style="stop-color:#0fb600;stop-opacity:0;"
+         offset="1"
+         id="stop10185" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient10187"
+       id="linearGradient10189"
+       x1="61.65776"
+       y1="121.44018"
+       x2="179.27783"
+       y2="121.44018"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     style="fill:#0000ff">
+    <path
+       sodipodi:type="spiral"
+       style="fill:url(#linearGradient10189);fill-rule:evenodd;stroke:#0fb600;stroke-width:12.465;stroke-dasharray:none;stroke-opacity:1;fill-opacity:1"
+       id="path368"
+       sodipodi:cx="116.92353"
+       sodipodi:cy="124.95261"
+       sodipodi:expansion="1"
+       sodipodi:revolution="4.0898452"
+       sodipodi:radius="57.747242"
+       sodipodi:argument="-25.016638"
+       sodipodi:t0="0.15091616"
+       d="m 111.1891,118.39003 c 3.39071,-4.95318 10.52302,-5.01409 14.95511,-1.49453 6.17367,4.90258 6.09637,14.20492 1.15909,19.93589 -6.38508,7.4115 -17.8993,7.18951 -24.91665,0.82366 -8.658408,-7.85455 -8.288627,-21.60022 -0.48823,-29.89743 9.31715,-9.910574 25.30502,-9.391341 34.8782,-0.1528 11.16604,10.77573 10.49639,29.01233 -0.18263,39.85897 -12.23172,12.42371 -32.72136,11.60305 -44.83975,-0.51806 -13.682908,-13.68597 -12.710827,-36.43161 0.853492,-49.820516 15.138988,-14.94322 40.142778,-13.819447 54.801298,1.188922 16.20436,16.591114 14.9287,43.854634 -1.52436,59.782064 -18.04255,17.46615 -47.567034,16.03845 -64.762838,-1.85978 C 62.393406,136.74296 63.973251,104.95655 83.317047,86.492805 104.261,66.501699 138.31009,68.233778 158.04143,89.023452 c 18.64705,19.647208 19.87104,50.709898 3.76236,72.267928" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Calque 2"
+     style="display:none">
+    <path
+       style="fill:#000000;stroke:#000000;stroke-width:1;stroke-dasharray:none;stroke-opacity:1"
+       d="M 164.6448,165.6631 C 101.82041,111.84956 101.82041,111.84956 101.82041,111.84956"
+       id="path4868" />
+  </g>
+  <metadata
+     id="metadata3589">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:title>CeintureEnroule</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+</svg>

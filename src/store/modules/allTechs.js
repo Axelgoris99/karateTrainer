@@ -6,6 +6,7 @@ export default {
     count: 3,
     lvl: 6,
     helpTechValue: "",
+    ready: false,
   },
   getters: {
     techniques(state) {
@@ -13,6 +14,9 @@ export default {
     },
     techniquesLvl(state) {
       return state.techniquesLvl;
+    },
+    ready(state) {
+      return state.ready;
     },
     nbTech(state) {
       return state.count;
@@ -52,6 +56,7 @@ export default {
   mutations: {
     LOAD_TECHNIQUES(state, tech) {
       state.techniques = tech;
+      state.ready = true;
     },
     SET_TECH_LVL(state) {
       for (let [key, value] of Object.entries(state.techniques)) {

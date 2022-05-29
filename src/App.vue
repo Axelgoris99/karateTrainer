@@ -7,16 +7,21 @@
     <router-link to="/about">A propos</router-link>
   </nav>
   <router-view v-if="ready" class="home" />
+  <div v-else>
+    <n-spin size="large" />
+  </div>
 </template>
 
 <script>
 import { fetchAllData } from "./firebaseModel.js";
+import { mapGetters } from "vuex";
+
 export default {
   name: "app",
-  data() {
-    return {
-      ready: true,
-    };
+  computed: {
+    ...mapGetters({
+      ready: "ready",
+    }),
   },
   created() {
     fetchAllData();
