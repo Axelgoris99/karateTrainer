@@ -34,7 +34,7 @@ function fetchAllData() {
           promises.push(promiseSon);
           const promiseImage = fetchImageUrl(value2.name)
             .then((url) => (value2["image"] = url))
-            .catch(() => (value2["image"] = require("./assets/logo.png")));
+            .catch(() => (value2["image"] = require("./assets/logoApk.png")));
           promises.push(promiseImage);
         }
       }
