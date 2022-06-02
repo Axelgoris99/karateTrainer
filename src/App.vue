@@ -1,15 +1,30 @@
 <template>
-  <nav>
-    <router-link to="/">Accueil</router-link> |
-    <router-link to="/grades">Passage de Grades</router-link> |
-    <router-link to="/quiz">Quiz</router-link> |
-    <router-link to="/lexique">Lexique</router-link> |
-    <router-link to="/about">A propos</router-link>
-  </nav>
-  <router-view v-if="ready" class="home" />
-  <div v-else>
-    <n-spin size="large" />
-  </div>
+  <n-config-provider :theme="theme">
+    <n-layout>
+      <n-layout-header
+        ><n-space>
+          <n-switch size="large">
+            <template #checked-icon> 0 </template>
+            <template #unchecked-icon> 1 </template>
+          </n-switch>
+        </n-space>
+        <nav>
+          <router-link to="/">Accueil</router-link> |
+          <router-link to="/grades">Passage de Grades</router-link> |
+          <router-link to="/quiz">Quiz</router-link> |
+          <router-link to="/lexique">Lexique</router-link> |
+          <router-link to="/about">A propos</router-link>
+        </nav>
+      </n-layout-header>
+      <n-layout-content content-style="padding: 24px;">
+        <router-view v-if="ready" class="home" />
+        <div v-else>
+          <n-spin size="large" />
+        </div>
+      </n-layout-content>
+      <n-layout-footer>© Copyright 2022 - Axel Goris </n-layout-footer>
+    </n-layout>
+  </n-config-provider>
 </template>
 
 <script>
