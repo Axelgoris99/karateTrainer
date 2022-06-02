@@ -5,5 +5,11 @@
       Réalisée par :
       <a href="https://axelgoris99.github.io/" target="_blank"> Axel Goris</a>
     </h2>
+    <div>
+      Mes remerciements au club
+      <a href="https://www.themartialway.com.au/shotokan/kihon/">
+        The Martial Way </a
+      >pour m'avoir permis d'utiliser certaines de leurs images.
+    </div>
   </div>
 </template>
