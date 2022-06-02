@@ -1,21 +1,7 @@
 <template>
   <n-config-provider :theme="theme">
     <n-layout>
-      <n-layout-header
-        ><n-space>
-          <n-switch size="large">
-            <template #checked-icon> 0 </template>
-            <template #unchecked-icon> 1 </template>
-          </n-switch>
-        </n-space>
-        <nav>
-          <router-link to="/">Accueil</router-link> |
-          <router-link to="/grades">Passage de Grades</router-link> |
-          <router-link to="/quiz">Quiz</router-link> |
-          <router-link to="/lexique">Lexique</router-link> |
-          <router-link to="/about">A propos</router-link>
-        </nav>
-      </n-layout-header>
+      <n-layout-header> <navBar /></n-layout-header>
       <n-layout-content content-style="padding: 24px;">
         <router-view v-if="ready" class="home" />
         <div v-else>
@@ -30,9 +16,10 @@
 <script>
 import { fetchAllData } from "./firebaseModel.js";
 import { mapGetters } from "vuex";
-
+import navBar from "./components/navbar/NavBar.vue";
 export default {
   name: "app",
+  components: { navBar },
   computed: {
     ...mapGetters({
       ready: "ready",
