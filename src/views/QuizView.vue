@@ -27,12 +27,3 @@ export default {
   components: { lvlSelector, quizzComp },
 };
 </script>
-
-<style scoped>
-.space {
-  margin: 5px;
-}
-.color {
-  background-color: blue;
-}
-</style>

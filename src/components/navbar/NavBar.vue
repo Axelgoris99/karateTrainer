@@ -1,18 +1,20 @@
 <script>
 import navbarLink from "./navbarLink";
 import { collapsed, toggleNavbar, navbarHeight } from "./state";
-
+import { screenIsBig } from "./state";
+import settingsBar from "./settingsBar.vue";
 export default {
   props: {},
-  components: { navbarLink },
+  components: { navbarLink, settingsBar },
   data() {
     return {
+      screenIsBig,
       navigation: [
         { link: "/", name: "Accueil", icon: "bi bi-house" },
-        { link: "/grades", name: "Grades", icon: "bi bi-house" },
-        { link: "/quiz", name: "Quizz", icon: "bi bi-house" },
-        { link: "/lexique", name: "Lexique", icon: "bi bi-house" },
-        { link: "/about", name: "A propos", icon: "bi bi-house" },
+        { link: "/grades", name: "Grades", icon: "bi bi-life-preserver" },
+        { link: "/quiz", name: "Quizz", icon: "bi bi-question" },
+        { link: "/lexique", name: "Lexique", icon: "bi bi-book" },
+        { link: "/about", name: "A propos", icon: "bi bi-gear" },
       ],
     };
   },
@@ -23,30 +25,35 @@ export default {
 </script>
 
 <template>
-  <div class="navbar" :style="{ height: navbarHeight }">
-    <h1>
-      <span v-if="collapsed"> </span>
-      <span v-else>Karate Trainer <i class="bi bi-house"></i> </span>
-    </h1>
-    <span
-      class="collapse-icon"
-      :class="{ 'rotate-180': collapsed }"
-      @click="toggleNavbar"
-    >
-      TEST
-      <i class="fas fa-angle-double-left" />
-    </span>
-    <n-space justify="center">
-      <ul>
-        <navbarLink
-          v-for="p in navigation"
-          :key="p.name"
-          :to="p.link"
-          :icon="p.icon"
-          >{{ p.name }}</navbarLink
-        >
-      </ul>
-    </n-space>
+  <div class="navbar" :class="{ flexWrapRow: collapsed, flexWrap: !collapsed }">
+    <div class="start">
+      <router-link to="/"
+        ><n-image
+          width="50"
+          :src="require('../../assets/logoApk.png')"
+          preview-disabled
+      /></router-link>
+    </div>
+    <div :class="{ flexWrapRow: collapsed, flexWrap: !collapsed }">
+      <navbarLink
+        v-for="p in navigation"
+        :key="p.name"
+        :to="p.link"
+        :icon="p.icon"
+        >{{ p.name }}</navbarLink
+      >
+      <settingsBar v-if="!collapsed" />
+    </div>
+    <div class="end" v-if="!screenIsBig">
+      <span
+        class="collapse-icon"
+        :class="{ 'rotate-180': collapsed }"
+        @click="toggleNavbar"
+      >
+        <i class="bi bi-caret-up"></i>
+      </span>
+    </div>
+    <settingsBar v-else />
   </div>
 </template>
 
@@ -65,15 +72,36 @@ export default {
   z-index: 1;
   padding: 0.5em;
   transition: 0.3s ease;
+}
+.flexWrap {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 320px;
 }
-
+.flexWrapRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+}
+.start {
+  justify-self: start;
+  align-self: start;
+}
+.end {
+  justify-self: end;
+  align-self: end;
+  margin-top: 10px;
+}
 .navbar h1 {
   height: 2.5em;
 }
 
 .collapse-icon {
+  display: block;
   padding: 0.75em;
   color: rgba(255, 255, 255, 0.7);
   transition: 0.2s linear;
@@ -82,5 +110,9 @@ export default {
 .rotate-180 {
   transform: rotate(180deg);
   transition: 0.2s linear;
+}
+
+.marginTop {
+  margin-top: 10px;
 }
 </style>

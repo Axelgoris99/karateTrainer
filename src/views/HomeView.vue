@@ -2,7 +2,7 @@
   <div>
     <n-space vertical>
       <div>
-        <h1>Bienvenu sur votre coach personnel de karaté!</h1>
+        <h1>Bienvenue sur votre coach personnel de karaté !</h1>
         <p>
           Ici, vous pouvez générer des enchainements de Kihon adapté à votre
           niveau de manière aléatoire. Attention, certains seront plus durs que
