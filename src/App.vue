@@ -27,7 +27,7 @@ export default {
   components: { navBar },
   computed: {
     ...mapGetters({
-      ready: "ready",
+      ready: "allTechs/ready",
     }),
   },
   created() {

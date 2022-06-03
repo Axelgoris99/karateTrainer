@@ -17,6 +17,9 @@
 import { mapGetters } from "vuex";
 export default {
   name: "genRes",
+  props: {
+    restrictions: Array,
+  },
   data() {
     return {
       loading: false,
@@ -24,11 +27,11 @@ export default {
   },
   computed: {
     ...mapGetters({
-      techniques: "techniquesLvl",
-      selected: "selected",
-      selectDesc: "selectDesc",
-      selectList: "selectList",
-      count: "nbTech",
+      techniques: "allTechs/techniquesLvl",
+      selected: "selectedTechs/selected",
+      selectDesc: "selectedTechs/selectDesc",
+      selectList: "selectedTechs/selectList",
+      count: "allTechs/nbTech",
     }),
 
     positions() {
@@ -49,7 +52,7 @@ export default {
       var arrayOfTechs = [];
       for (let [key, value] of Object.entries(this.techniques)) {
         key;
-        if (key != "positions") {
+        if (key != "positions" && !this.restrictions.includes(key)) {
           for (let [key1, value1] of Object.entries(value)) {
             key1;
             arrayOfTechs.push(value1);
@@ -59,15 +62,16 @@ export default {
       return arrayOfTechs;
     },
   },
-  emits: ["show", "hide", "play"],
+  emits: ["show", "hide", "play", "reset"],
   methods: {
     clear() {
       this.$emit("hide");
-      this.$store.dispatch("unsetSelected");
+      this.$emit("reset");
+      this.$store.dispatch("selectedTechs/unsetSelected");
     },
     techniquesSelection() {
-      this.$store.dispatch("clearTech");
-      this.$store.dispatch("clearTechDesc");
+      this.$store.dispatch("selectedTechs/clearTech");
+      this.$store.dispatch("selectedTechs/clearTechDesc");
       var sel;
       const fillTechDesc = async () => {
         for (let i = 0; i < this.count; i++) {
@@ -90,15 +94,15 @@ export default {
             resolve();
           }).then(() => {
             if (!this.selectDesc.some((e) => e.name == sel.name)) {
-              this.$store.dispatch("addTechDesc", sel);
+              this.$store.dispatch("selectedTechs/addTechDesc", sel);
             }
             var obj = { ...sel, ...{ number: i } };
-            this.$store.dispatch("addTech", obj);
+            this.$store.dispatch("selectedTechs/addTech", obj);
           });
         }
       };
       fillTechDesc().finally(() => {
-        this.$store.dispatch("setHelpTech", this.selectDesc[0].name);
+        this.$store.dispatch("allTechs/setHelpTech", this.selectDesc[0].name);
         this.$emit("play", 0);
         this.$emit("show");
       });

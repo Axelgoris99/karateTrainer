@@ -32,12 +32,12 @@ export default {
   },
   computed: {
     ...mapGetters({
-      value: "lvl",
+      value: "allTechs/lvl",
     }),
   },
   methods: {
     changedLvl(val) {
-      this.$store.dispatch("setLvl", val);
+      this.$store.dispatch("allTechs/setLvl", val);
     },
   },
 };

@@ -1,5 +1,6 @@
 import convertLvl from "../../components/functions/convertLvl";
 export default {
+  namespaced: true,
   state: {
     techniques: {},
     techniquesLvl: {},
@@ -93,7 +94,7 @@ export default {
     setLvl({ commit, dispatch }, val) {
       commit("SET_LVL", val);
       commit("SET_TECH_LVL");
-      dispatch("setCombosLvl");
+      dispatch("combosTechs/setCombosLvl", null, { root: true });
     },
     setHelpTech({ commit }, name) {
       commit("SET_HELP_TECH", name);

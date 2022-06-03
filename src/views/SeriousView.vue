@@ -38,15 +38,15 @@ export default {
   },
   computed: {
     ...mapGetters({
-      selectDesc: "selectDesc",
-      selectList: "selectList",
-      combos: "combosLvl",
+      selectDesc: "selectedTechs/selectDesc",
+      selectList: "selectedTechs/selectList",
+      combos: "combosTechs/combosLvl",
     }),
   },
   methods: {
     techniquesSelection() {
-      this.$store.dispatch("clearTech");
-      this.$store.dispatch("clearTechDesc");
+      this.$store.dispatch("selectedTechs/clearTech");
+      this.$store.dispatch("selectedTechs/clearTechDesc");
       var sel;
       var combo =
         this.combos[
@@ -55,19 +55,19 @@ export default {
       const fillTechDesc = async () => {
         for (let i = 0; i < Object.keys(combo).length - 1; i++) {
           await new Promise((resolve) => {
-            sel = this.$store.getters.tech(combo[i]);
+            sel = this.$store.getters["allTechs/tech"](combo[i]);
             resolve();
           }).then(() => {
             if (!this.selectDesc.some((e) => e.name == sel.name)) {
-              this.$store.dispatch("addTechDesc", sel);
+              this.$store.dispatch("selectedTechs/addTechDesc", sel);
             }
             var obj = { ...sel, ...{ number: i } };
-            this.$store.dispatch("addTech", obj);
+            this.$store.dispatch("selectedTechs/addTech", obj);
           });
         }
       };
       fillTechDesc().finally(() => {
-        this.$store.dispatch("setHelpTech", this.selectDesc[0].name);
+        this.$store.dispatch("allTechs/setHelpTech", this.selectDesc[0].name);
         this.playSound(0);
         this.$emit("show");
       });

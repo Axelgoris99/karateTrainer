@@ -39,13 +39,13 @@ function fetchAllData() {
         }
       }
       Promise.all(promises).then(() => {
-        store.dispatch("setTechniques", val);
+        store.dispatch("allTechs/setTechniques", val);
       });
     }
   });
   onValue(ref(database, "/enchainements"), (snapshot) => {
     if (snapshot.val()) {
-      store.dispatch("setCombos", snapshot.val());
+      store.dispatch("combosTechs/setCombos", snapshot.val());
     }
   });
 }

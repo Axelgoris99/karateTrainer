@@ -7,6 +7,9 @@
           Ici, vous pouvez générer des enchainements de Kihon adapté à votre
           niveau de manière aléatoire. Attention, certains seront plus durs que
           d'autres!
+          <br />
+          Les Kihon sont des techniques de défense, d'attaque et de déplacement
+          que l'on répète seul. D'où l'intérêt de ce site!
         </p>
       </div>
       <n-divider />
@@ -14,8 +17,14 @@
       <n-divider />
       <nbTech />
       <n-divider />
-      <choiceTech />
-      <genRes @show="show" @hide="hide" @play="playSound" />
+      <choiceTech :restrictions="restrictions" :clear="resetTreeSelect" />
+      <genRes
+        :restrictions="restrictions"
+        @show="show"
+        @hide="hide"
+        @reset="reset"
+        @play="playSound"
+      />
       <div v-if="affiche">
         <helpTech @play="playSound" />
       </div>
@@ -37,11 +46,13 @@ export default {
   data() {
     return {
       affiche: false,
+      restrictions: [],
+      resetTreeSelect: false,
     };
   },
   computed: {
     ...mapGetters({
-      sounds: "selectList",
+      sounds: "selectedTechs/selectList",
     }),
   },
   methods: {
@@ -50,6 +61,9 @@ export default {
     },
     hide() {
       this.affiche = false;
+    },
+    reset() {
+      this.resetTreeSelect = !this.resetTreeSelect;
     },
     playSound(i) {
       const comp = this;

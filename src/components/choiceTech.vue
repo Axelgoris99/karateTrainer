@@ -9,6 +9,7 @@
     <treeSelect
       :options="options"
       :number="n - 1"
+      :reset="clear"
       @updateValue="updateValue"
     ></treeSelect>
   </div>
@@ -19,23 +20,29 @@ import { mapGetters } from "vuex";
 export default {
   name: "choiceTech",
   components: { treeSelect },
+  props: {
+    restrictions: Array,
+    clear: Boolean,
+  },
   data() {
     return {};
   },
   computed: {
     ...mapGetters({
-      techniques: "techniquesLvl",
-      count: "nbTech",
+      techniques: "allTechs/techniquesLvl",
+      count: "allTechs/nbTech",
     }),
     options() {
       var types = [];
       for (let [key, value] of Object.entries(this.techniques)) {
-        var children = [];
-        for (let [key1, value1] of Object.entries(value)) {
-          children.push({ label: value1.name, key: key1 });
+        if (!this.restrictions.includes(key)) {
+          var children = [];
+          for (let [key1, value1] of Object.entries(value)) {
+            children.push({ label: value1.name, key: key1 });
+          }
+          var tree = { label: key.toUpperCase(), key: key, children: children };
+          types.push(tree);
         }
-        var tree = { label: key.toUpperCase(), key: key, children: children };
-        types.push(tree);
       }
       return types;
     },
@@ -43,7 +50,7 @@ export default {
   methods: {
     updateValue(value, numberTree) {
       var obj = { value, numberTree };
-      this.$store.dispatch("setSelected", obj);
+      this.$store.dispatch("selectedTechs/setSelected", obj);
     },
   },
 };

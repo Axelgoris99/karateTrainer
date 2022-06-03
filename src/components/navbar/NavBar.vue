@@ -23,6 +23,10 @@ export default {
               label: "Kihon Sur place",
               key: "standing",
             },
+            {
+              label: "Kihon Ippon Kumite",
+              key: "ipponkumite",
+            },
           ],
         },
         { link: "/grades", name: "Grades", icon: "bi bi-life-preserver" },

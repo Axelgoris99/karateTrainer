@@ -20,12 +20,12 @@ export default {
   },
   computed: {
     ...mapGetters({
-      count: "nbTech",
+      count: "allTechs/nbTech",
     }),
   },
   methods: {
     countStore(val) {
-      this.$store.dispatch("setCount", val);
+      this.$store.dispatch("allTechs/setCount", val);
     },
   },
 };

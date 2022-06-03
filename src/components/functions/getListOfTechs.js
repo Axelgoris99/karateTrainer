@@ -2,7 +2,7 @@ import store from "../../store/index";
 import convertLvl from "./convertLvl";
 const grades = ["blanc", "jaune", "orange", "vert", "bleu", "marron", "noir"];
 function getList(name) {
-  var obj = store.getters.sameTypeOfTechs(name);
+  var obj = store.getters["allTechs/sameTypeOfTechs"](name);
   var array = [];
   for (let i = 0; i < grades.length; i++) {
     array.push([]);

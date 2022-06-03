@@ -24,6 +24,14 @@ const routes = [
       ),
   },
   {
+    path: "/home/ipponkumite",
+    name: "ipponkumite",
+    component: () =>
+      import(
+        /* webpackChunkName: "ipponkumite" */ "../views/KihonIpponKumiteView.vue"
+      ),
+  },
+  {
     path: "/about",
     name: "about",
     // route level code-splitting

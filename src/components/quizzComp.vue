@@ -44,7 +44,7 @@
             <h2>Réponse</h2>
             <p>Nom : {{ selected.name }}</p>
             <p>Description : {{ selected.desc }}</p>
-            <div>Son : <br /><Audio controls :src="selected.sound" /></div>
+            <div>Son : <br /><audio controls :src="selected.sound" /></div>
             <div>
               Image : <br /><n-image :src="selected.image" width="150" />
             </div>
@@ -158,7 +158,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      techniques: "techniquesLvl",
+      techniques: "allTechs/techniquesLvl",
     }),
     techs() {
       var arrayOfTechs = [];
@@ -221,7 +221,11 @@ export default {
       }
       this.choices = shuffle(this.choices);
       this.startChrono();
-      this.time = 15;
+      if (this.answerType === "sound") {
+        this.time = 30;
+      } else {
+        this.time = 15;
+      }
     },
     startChrono() {
       const comp = this;

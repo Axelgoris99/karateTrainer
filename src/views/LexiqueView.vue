@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <h1>Lexique des techniques!</h1>
+      <h1>Lexique des techniques !</h1>
       <p>Ici, une pléthore de techniques avec description, image et son !</p>
     </div>
     <n-divider />
@@ -72,7 +72,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      techniques: "techniques",
+      techniques: "allTechs/techniques",
     }),
     fist() {
       return getList("poings");

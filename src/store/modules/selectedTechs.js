@@ -1,4 +1,5 @@
 export default {
+  namespaced: true,
   state: {
     selected: [],
     // The one with Descriptions filter duplicates
@@ -66,18 +67,45 @@ export default {
   },
   actions: {
     setSelected({ commit, rootGetters }, obj) {
-      commit("SET_SELECTED", [rootGetters.techniques, obj]);
+      commit("SET_SELECTED", [rootGetters["allTechs/techniques"], obj]);
     },
-    unsetSelected({ commit }) {
-      commit("SET_SELECTED", { value: [], numberTree: 0 });
-      commit("SET_SELECTED", { value: [], numberTree: 1 });
-      commit("SET_SELECTED", { value: [], numberTree: 2 });
-      commit("SET_SELECTED", { value: [], numberTree: 3 });
-      commit("SET_SELECTED", { value: [], numberTree: 4 });
-      commit("SET_SELECTED", { value: [], numberTree: 5 });
-      commit("SET_SELECTED", { value: [], numberTree: 6 });
-      commit("SET_SELECTED", { value: [], numberTree: 7 });
-      commit("SET_SELECTED", { value: [], numberTree: 8 });
+    unsetSelected({ commit, rootGetters }) {
+      commit("SET_SELECTED", [
+        rootGetters["allTechs/techniques"],
+        { value: [], numberTree: 0 },
+      ]);
+      commit("SET_SELECTED", [
+        rootGetters["allTechs/techniques"],
+        { value: [], numberTree: 1 },
+      ]);
+      commit("SET_SELECTED", [
+        rootGetters["allTechs/techniques"],
+        { value: [], numberTree: 2 },
+      ]);
+      commit("SET_SELECTED", [
+        rootGetters["allTechs/techniques"],
+        { value: [], numberTree: 3 },
+      ]);
+      commit("SET_SELECTED", [
+        rootGetters["allTechs/techniques"],
+        { value: [], numberTree: 4 },
+      ]);
+      commit("SET_SELECTED", [
+        rootGetters["allTechs/techniques"],
+        { value: [], numberTree: 5 },
+      ]);
+      commit("SET_SELECTED", [
+        rootGetters["allTechs/techniques"],
+        { value: [], numberTree: 6 },
+      ]);
+      commit("SET_SELECTED", [
+        rootGetters["allTechs/techniques"],
+        { value: [], numberTree: 7 },
+      ]);
+      commit("SET_SELECTED", [
+        rootGetters["allTechs/techniques"],
+        { value: [], numberTree: 8 },
+      ]);
       commit("CLEAR_SELECTEDDESC");
       commit("CLEAR_SELECTEDLIST");
     },

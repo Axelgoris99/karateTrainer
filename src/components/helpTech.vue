@@ -48,9 +48,9 @@ export default {
   name: "helpTech",
   computed: {
     ...mapGetters({
-      selectDesc: "selectDesc",
-      selectList: "selectList",
-      helpValue: "helpTech",
+      selectDesc: "selectedTechs/selectDesc",
+      selectList: "selectedTechs/selectList",
+      helpValue: "allTechs/helpTech",
     }),
   },
   emits: ["play"],
@@ -59,7 +59,7 @@ export default {
       this.$emit("play", 0);
     },
     helpValueChanged(val) {
-      this.$store.dispatch("setHelpTech", val);
+      this.$store.dispatch("allTechs/setHelpTech", val);
     },
   },
 };

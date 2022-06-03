@@ -7,6 +7,7 @@
       placeholder="Sélectionner les techniques désirées"
       clearable
       check-strategy="parent"
+      :value="values"
       :options="options"
       @update:value="handleUpdateValue"
     />
@@ -28,12 +29,13 @@ export default {
   },
   watch: {
     reset() {
-      // console.log("tet");
+      this.values = [];
     },
   },
   emits: ["updateValue"],
   methods: {
     handleUpdateValue(value) {
+      this.values = value;
       this.$emit("updateValue", value, this.number);
     },
   },
