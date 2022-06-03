@@ -63,7 +63,7 @@ export default {
       this.affiche = false;
     },
     reset() {
-      this.resetTreeSelect = !this.resetTreeSelect;
+      this.resetTreeSelect = !this.resetTree;
     },
     playSound(i) {
       const comp = this;

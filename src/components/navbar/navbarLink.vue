@@ -78,6 +78,5 @@ export default {
 .link .icon {
   flex-shrink: 0;
   width: 25px;
-  margin-right: 10px;
 }
 </style>

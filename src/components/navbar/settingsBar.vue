@@ -8,20 +8,30 @@
         <i class="bi bi-brightness-high"></i>
       </template>
     </n-switch> -->
-    <n-button-group size="medium">
-      <n-button round :color="color">
-        <template #icon>
-          <n-icon><i class="bi bi-person"></i> </n-icon>
-        </template>
-        Mon profil
-      </n-button>
-      <n-button round :color="color">
+    <div v-if="connected">
+      <n-button-group size="medium">
+        <n-button round :color="color" @click="profilePage">
+          <template #icon>
+            <n-icon><i class="bi bi-person"></i> </n-icon>
+          </template>
+          Mon profil
+        </n-button>
+        <n-button round :color="color" @click="handleDisconnect">
+          <template #icon>
+            <n-icon><i class="bi bi-box-arrow-right"></i> </n-icon>
+          </template>
+          Déconnexion
+        </n-button>
+      </n-button-group>
+    </div>
+    <div v-else>
+      <n-button round :color="color" @click="loginPage">
         <template #icon>
           <n-icon><i class="bi bi-box-arrow-right"></i> </n-icon>
         </template>
-        Déconnexion
+        Se connecter
       </n-button>
-    </n-button-group>
+    </div>
     <!-- <n-dropdown trigger="hover" :options="options" @select="handleSelect">
       <n-button strong secondary circle :color="color" class="centerFlag">
         <template #icon>
@@ -36,6 +46,7 @@ export default {
   name: "settingsBar",
   data() {
     return {
+      connected: false,
       color: "#f0a020",
       options: [
         {
@@ -50,6 +61,15 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    handleDisconnect() {},
+    loginPage() {
+      this.$router.push("login");
+    },
+    profilePage() {
+      this.$router.push("profile");
+    },
   },
 };
 </script>

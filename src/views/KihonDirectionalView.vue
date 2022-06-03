@@ -2,7 +2,12 @@
   <div>
     <n-space vertical>
       <div>
-        <h1>Kihon Multi-Directionnelle</h1>
+        <h1>Deux exercices similaires !</h1>
+        <p>
+          Ces deux exercices partagent le même genre de techniques, c'est pour
+          cela qu'ils sont sur la même page.
+        </p>
+        <h2>Kihon Multi-Directionnelle</h2>
         <p>
           Le Kihon Multi-Directionnelle est un exercice simple une fois préparé.
           <br />On te demande d'enchainer 2/3 techniques et de les reproduire
@@ -11,17 +16,23 @@
           quart de tour et recommence. Et ainsi de suite jusqu'à être revenu à
           ta position initiale.
         </p>
+        <h2>Kihon Sur Place</h2>
+        <p>
+          Le Kihon Sur Place est encore plus simple que tout le reste! <br />Un
+          enchainement de trois techniques sur place, avec ou sans sursaut.
+        </p>
       </div>
       <n-divider />
       <lvlSelector />
       <n-divider />
       <nbTech />
       <n-divider />
-      <choiceTech :restrictions="restrictions" />
+      <choiceTech :restrictions="restrictions" :clear="resetTreeSelect" />
       <genRes
         :restrictions="restrictions"
         @show="show"
         @hide="hide"
+        @reset="reset"
         @play="playSound"
       />
       <div v-if="affiche">
@@ -46,6 +57,7 @@ export default {
     return {
       affiche: false,
       restrictions: ["deplacements"],
+      resetTreeSelect: false,
     };
   },
   computed: {
@@ -59,6 +71,9 @@ export default {
     },
     hide() {
       this.affiche = false;
+    },
+    reset() {
+      this.resetTreeSelect = !this.resetTreeSelect;
     },
     playSound(i) {
       const comp = this;

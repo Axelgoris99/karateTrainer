@@ -5,7 +5,6 @@ import { getDatabase, ref, onValue, get } from "firebase/database";
 import firebaseConfig from "./firebaseSettings.js";
 import store from "./store/index.js";
 const app = firebase.initializeApp(firebaseConfig);
-
 const analytics = getAnalytics(app);
 logEvent(analytics, "select_content");
 var database = getDatabase();

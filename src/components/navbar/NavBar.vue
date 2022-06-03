@@ -19,10 +19,10 @@ export default {
               label: "Kihon Multi-directionnel",
               key: "directional",
             },
-            {
-              label: "Kihon Sur place",
-              key: "standing",
-            },
+            // {
+            //   label: "Kihon Sur place",
+            //   key: "standing",
+            // },
             {
               label: "Kihon Ippon Kumite",
               key: "ipponkumite",

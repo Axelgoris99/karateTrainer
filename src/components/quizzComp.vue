@@ -144,6 +144,7 @@ export default {
       start: false,
       score: 0,
       time: 15,
+      nbQGood: 0,
       selection: null,
       questionType: null,
       answerType: null,
@@ -255,7 +256,10 @@ export default {
         ) + 1;
       this.pause = true;
       if (this.selected.name === this.choices[choice].name) {
+        this.nbQGood += 1;
         this.score += this.time;
+        this.$store.dispatch("quizz/setHighScore", this.score);
+        this.$store.dispatch("quizz/setNbQMax", this.nbQGood);
         this.next = true;
         clearInterval(this.chrono);
       } else {

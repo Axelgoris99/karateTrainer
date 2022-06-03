@@ -7,6 +7,9 @@
       pourras riposter avec ce que tu as préparé. <br />Et cette page est là
       pour t'aider à te préparer !
     </p>
+    <img
+      src="https://www.electrical-engineering-solutions.com/static/gif/site_en_construction.gif"
+    />
   </div>
 </template>
 

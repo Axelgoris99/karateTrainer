@@ -15,14 +15,14 @@ const routes = [
         /* webpackChunkName: "directional" */ "../views/KihonDirectionalView.vue"
       ),
   },
-  {
-    path: "/home/standing",
-    name: "standing",
-    component: () =>
-      import(
-        /* webpackChunkName: "standing" */ "../views/KihonStandingView.vue"
-      ),
-  },
+  // {
+  //   path: "/home/standing",
+  //   name: "standing",
+  //   component: () =>
+  //     import(
+  //       /* webpackChunkName: "standing" */ "../views/KihonStandingView.vue"
+  //     ),
+  // },
   {
     path: "/home/ipponkumite",
     name: "ipponkumite",
@@ -57,6 +57,18 @@ const routes = [
     name: "quiz",
     component: () =>
       import(/* webpackChunkName: "quiz" */ "../views/QuizView.vue"),
+  },
+  {
+    path: "/login",
+    name: "login",
+    component: () =>
+      import(/* webpackChunkName: "login" */ "../views/loginView.vue"),
+  },
+  {
+    path: "/profile",
+    name: "profile",
+    component: () =>
+      import(/* webpackChunkName: "profile" */ "../views/profileView.vue"),
   },
   {
     path: "/:pathMatch(.*)*",
