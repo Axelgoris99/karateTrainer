@@ -1,5 +1,7 @@
 # Karate Trainer
 
+The current Website is hosted at : https://karate-trainer79.web.app/
+
 ## Project setup
 ```
 npm install
