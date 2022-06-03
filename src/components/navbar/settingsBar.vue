@@ -8,7 +8,7 @@
         <i class="bi bi-brightness-high"></i>
       </template>
     </n-switch> -->
-    <div v-if="connected">
+    <div v-if="loggedIn">
       <n-button-group size="medium">
         <n-button round :color="color" @click="profilePage">
           <template #icon>
@@ -42,6 +42,9 @@
   </div>
 </template>
 <script>
+import { mapGetters } from "vuex";
+import { auth } from "../../firebaseModel";
+import { signOut } from "firebase/auth";
 export default {
   name: "settingsBar",
   data() {
@@ -62,8 +65,23 @@ export default {
       ],
     };
   },
+  computed: {
+    ...mapGetters({
+      user: "auth/user",
+      loggedIn: "auth/loggedIn",
+    }),
+  },
   methods: {
-    handleDisconnect() {},
+    handleDisconnect() {
+      signOut(auth)
+        .then(() => {
+          // Sign-out successful.
+        })
+        .catch((error) => {
+          // An error happened.
+          error;
+        });
+    },
     loginPage() {
       this.$router.push("login");
     },

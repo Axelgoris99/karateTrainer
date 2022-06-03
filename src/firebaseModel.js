@@ -4,11 +4,14 @@ import "firebase/compat/storage";
 import { getDatabase, ref, onValue, get } from "firebase/database";
 import firebaseConfig from "./firebaseSettings.js";
 import store from "./store/index.js";
+import { getAuth } from "firebase/auth";
+
 const app = firebase.initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 logEvent(analytics, "select_content");
 var database = getDatabase();
 const storage = firebase.storage();
+const auth = getAuth();
 
 const fetchImageUrl = (name) => {
   return storage.ref().child(`images/${name}.png`).getDownloadURL();
@@ -48,4 +51,14 @@ function fetchAllData() {
     }
   });
 }
-export { fetchImageUrl, fetchSoundUrl, fetchAllData };
+
+function updateFirebaseFromModel() {}
+function updateModelFromFirebase() {}
+export {
+  fetchImageUrl,
+  fetchSoundUrl,
+  fetchAllData,
+  updateFirebaseFromModel,
+  updateModelFromFirebase,
+  auth,
+};

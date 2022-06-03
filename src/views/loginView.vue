@@ -2,6 +2,7 @@
   <div>
     <div>
       <h2>Inscription</h2>
+      <p>{{ errorReg }}</p>
       <form action="" method="get" class="form">
         <div class="formItem">
           <label for="name">Entrer votre nom: </label>
@@ -54,6 +55,7 @@
     </div>
     <div>
       <h2>Connection</h2>
+      <p>{{ errorLog }}</p>
       <form action="" method="get" class="form">
         <div class="formItem">
           <label for="email">Entrer votre adresse mail: </label>
@@ -95,10 +97,13 @@
 
 <script>
 import {
-  getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile,
+  signOut,
 } from "firebase/auth";
+import { auth } from "../firebaseModel";
+
 export default {
   data() {
     return {
@@ -111,13 +116,13 @@ export default {
         email: "",
         password: "",
       },
-      error: null,
+      errorReg: null,
+      errorLog: null,
     };
   },
   methods: {
     handleName(evt) {
       this.form.name = evt.target.value;
-      console.log(this.form.name);
     },
     handleMail(evt) {
       this.form.email = evt.target.value;
@@ -132,33 +137,34 @@ export default {
       this.login.password = evt.target.value;
     },
     submitRegister() {
-      const auth = getAuth();
       createUserWithEmailAndPassword(auth, this.form.email, this.form.password)
         .then((data) => {
-          data.user
-            .updateProfile({
-              displayName: this.form.name,
-            })
-            .then(() => {});
+          updateProfile(data.user, {
+            displayName: this.form.name,
+          })
+            .then(() => signOut(auth))
+            .then(() =>
+              signInWithEmailAndPassword(
+                auth,
+                this.form.email,
+                this.form.password
+              )
+            )
+            .then(() => {
+              this.$router.push("profile");
+            });
         })
         .catch((err) => {
-          this.error = err.message;
-          console.log(err.message);
+          this.errorReg = err.message;
         });
     },
     submitLogin() {
-      const auth = getAuth();
-      signInWithEmailAndPassword(auth, this.form.email, this.form.password)
-        .then((data) => {
-          data.user
-            .updateProfile({
-              displayName: this.form.name,
-            })
-            .then(() => {});
+      signInWithEmailAndPassword(auth, this.login.email, this.login.password)
+        .then(() => {
+          this.$router.push("profile");
         })
         .catch((err) => {
-          this.error = err.message;
-          console.log(err.message);
+          this.errorLog = err.message;
         });
     },
   },
