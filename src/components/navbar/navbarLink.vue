@@ -8,24 +8,34 @@ export default {
   props: {
     to: { type: String, required: true },
     icon: { type: String, required: true },
+    options: Array,
   },
   setup(props) {
     const route = useRoute();
-    const isActive = computed(() => route.path === props.to);
+    const isActive = computed(() => {
+      return route.path.includes(props.to);
+    });
     return { isActive, collapsed, screenIsBig };
+  },
+  methods: {
+    handleSelect(key) {
+      this.$router.push({ name: key });
+    },
   },
 };
 </script>
 
 <template>
-  <router-link :to="to" class="link" :class="{ active: isActive }">
-    <i class="icon" :class="icon" />
-    <transition name="fade">
-      <span v-if="!collapsed || screenIsBig">
-        <slot />
-      </span>
-    </transition>
-  </router-link>
+  <n-dropdown trigger="hover" :options="options" @select="handleSelect">
+    <router-link :to="to" class="link" :class="{ active: isActive }">
+      <i class="icon" :class="icon" />
+      <transition name="fade">
+        <span v-if="!collapsed || screenIsBig">
+          <slot />
+        </span>
+      </transition>
+    </router-link>
+  </n-dropdown>
 </template>
 
 <style scoped>

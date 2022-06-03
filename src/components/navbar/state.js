@@ -7,7 +7,6 @@ export const screenIsBig = ref(window.innerWidth >= 992);
 
 function reportWindowSize() {
   screenIsBig.value = window.innerWidth >= 992;
-  console.log(screenIsBig.value);
   if (screenIsBig.value) {
     collapsed.value = true;
   }

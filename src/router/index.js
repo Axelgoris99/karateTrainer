@@ -3,9 +3,25 @@ import HomeView from "../views/HomeView.vue";
 
 const routes = [
   {
-    path: "/",
+    path: "/home",
     name: "home",
     component: HomeView,
+  },
+  {
+    path: "/home/directional",
+    name: "directional",
+    component: () =>
+      import(
+        /* webpackChunkName: "directional" */ "../views/KihonDirectionalView.vue"
+      ),
+  },
+  {
+    path: "/home/standing",
+    name: "standing",
+    component: () =>
+      import(
+        /* webpackChunkName: "standing" */ "../views/KihonStandingView.vue"
+      ),
   },
   {
     path: "/about",

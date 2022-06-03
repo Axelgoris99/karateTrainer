@@ -10,7 +10,21 @@ export default {
     return {
       screenIsBig,
       navigation: [
-        { link: "/", name: "Accueil", icon: "bi bi-house" },
+        {
+          link: "/home",
+          name: "Accueil",
+          icon: "bi bi-house",
+          options: [
+            {
+              label: "Kihon Multi-directionnel",
+              key: "directional",
+            },
+            {
+              label: "Kihon Sur place",
+              key: "standing",
+            },
+          ],
+        },
         { link: "/grades", name: "Grades", icon: "bi bi-life-preserver" },
         { link: "/quiz", name: "Quizz", icon: "bi bi-question" },
         { link: "/lexique", name: "Lexique", icon: "bi bi-book" },
@@ -39,6 +53,7 @@ export default {
         v-for="p in navigation"
         :key="p.name"
         :to="p.link"
+        :options="p.options"
         :icon="p.icon"
         >{{ p.name }}</navbarLink
       >

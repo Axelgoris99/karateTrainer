@@ -3,7 +3,12 @@
     <n-layout>
       <n-layout-header> <navBar /></n-layout-header>
       <n-layout-content content-style="padding: 24px;">
-        <router-view v-if="ready" class="home" />
+        <!-- <router-view v-if="ready" class="home" /> -->
+        <router-view v-if="ready" v-slot="{ Component }" class="home">
+          <transition name="fade" mode="out-in">
+            <component :is="Component" />
+          </transition>
+        </router-view>
         <div v-else>
           <n-spin size="large" />
         </div>
@@ -54,5 +59,14 @@ nav {
       font-size: x-large;
     }
   }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

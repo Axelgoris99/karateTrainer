@@ -1,13 +1,13 @@
 <template>
   <div class="marginTop">
-    <n-switch v-model:value="active" size="large" class="centerSwitch">
+    <!-- <n-switch v-model:value="active" size="large" class="centerSwitch">
       <template #checked-icon>
         <i class="bi bi-moon-stars"></i>
       </template>
       <template #unchecked-icon>
         <i class="bi bi-brightness-high"></i>
       </template>
-    </n-switch>
+    </n-switch> -->
     <n-button-group size="medium">
       <n-button round :color="color">
         <template #icon>
@@ -22,13 +22,13 @@
         Déconnexion
       </n-button>
     </n-button-group>
-    <n-dropdown trigger="hover" :options="options" @select="handleSelect">
+    <!-- <n-dropdown trigger="hover" :options="options" @select="handleSelect">
       <n-button strong secondary circle :color="color" class="centerFlag">
         <template #icon>
           <n-icon><i class="bi bi-translate"></i></n-icon>
         </template>
       </n-button>
-    </n-dropdown>
+    </n-dropdown> -->
   </div>
 </template>
 <script>
