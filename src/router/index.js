@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
+import auth from "../store/modules/auth";
 
 const routes = [
   {
@@ -81,4 +82,9 @@ const router = createRouter({
   routes,
 });
 
+router.beforeEach((to) => {
+  if (to.name === "profile" && !auth.loggedIn) {
+    return { name: "login" };
+  }
+});
 export default router;
