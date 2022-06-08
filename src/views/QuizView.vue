@@ -3,7 +3,7 @@
     <div>
       <h1>Quizz Time !</h1>
       <p>
-        Ici, vous pouvez apprendre des techniques en vous amusant! Un score
+        Ici, vous pouvez apprendre des techniques en vous amusant ! Un score
         ainsi qu'un "palmarès" sera potentiellement ajouté.
         <br />
         Un nom, une image, une description ou un son vous seront proposés et

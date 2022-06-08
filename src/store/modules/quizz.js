@@ -13,23 +13,23 @@ export default {
     },
   },
   mutations: {
-    SET_HIGHSCORE(state, val) {
-      if (val > state.highScore) {
-        state.highScore = val;
+    SET_HIGHSCORE(state, payload) {
+      if (payload.highScore > state.highScore) {
+        state.highScore = payload.highScore;
       }
     },
-    SET_NBQMAX(state, nb) {
-      if (nb > state.nbQMax) {
-        state.nbQMax = nb;
+    SET_NBQMAX(state, payload) {
+      if (payload.nbQ > state.nbQMax) {
+        state.nbQMax = payload.nbQ;
       }
     },
   },
   actions: {
     setHighScore({ commit }, val) {
-      commit("SET_HIGHSCORE", val);
+      commit("SET_HIGHSCORE", { highScore: val });
     },
     setNbQMax({ commit }, nb) {
-      commit("SET_NBQMAX", nb);
+      commit("SET_NBQMAX", { nbQ: nb });
     },
   },
 };

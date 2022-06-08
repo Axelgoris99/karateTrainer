@@ -1,97 +1,107 @@
 <template>
   <div>
-    <div>
-      <h2>Inscription</h2>
-      <p>{{ errorReg }}</p>
-      <form action="" method="get" class="form">
-        <div class="formItem">
-          <label for="name">Entrer votre nom: </label>
-          <input
-            type="text"
-            name="name"
-            id="name"
-            required
-            autofocus
-            autocomplete="username"
-            placeholder="Karateka Exceptionel"
-            :value="form.name"
-            @input="handleName"
-          />
-        </div>
-        <div class="formItem">
-          <label for="email">Entrer votre adresse mail: </label>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            required
-            autofocus
-            autocomplete="email"
-            placeholder="SuperTonAdresse@gmail.com"
-            :value="form.email"
-            @input="handleMail"
-          />
-        </div>
-        <div class="formItem">
-          <label for="pwd">Entrer votre mot de passe: </label>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            required
-            autofocus
-            placeholder="1A3-45-678"
-            autocomplete="current-password"
-            :value="form.password"
-            @input="handlePwd"
-          />
-        </div>
-        <div class="formItem">
-          <n-button strong type="primary" @click="submitRegister"
-            >Inscription !</n-button
-          >
-        </div>
-      </form>
-    </div>
-    <div>
-      <h2>Connection</h2>
-      <p>{{ errorLog }}</p>
-      <form action="" method="get" class="form">
-        <div class="formItem">
-          <label for="email">Entrer votre adresse mail: </label>
-          <input
-            type="email"
-            name="email"
-            id="emailLog"
-            required
-            autofocus
-            autocomplete="email"
-            placeholder="SuperTonAdresse@gmail.com"
-            :value="login.email"
-            @input="handleLoginMail"
-          />
-        </div>
-        <div class="formItem">
-          <label for="pwd">Entrer votre mot de passe: </label>
-          <input
-            type="password"
-            name="password"
-            id="passwordLog"
-            required
-            autofocus
-            placeholder="1A3-45-678"
-            autocomplete="current-password"
-            :value="login.password"
-            @input="handleLoginPwd"
-          />
-        </div>
-        <div class="formItem">
-          <n-button strong type="primary" @click="submitLogin"
-            >Connection !</n-button
-          >
-        </div>
-      </form>
-    </div>
+    <n-card>
+      <n-tabs
+        class="card-tabs"
+        default-value="signin"
+        size="large"
+        animated
+        justify-content="space-evenly"
+        style="margin: 0 -4px"
+        pane-style="padding-left: 4px; padding-right: 4px; box-sizing: border-box;"
+      >
+        <n-tab-pane name="signin" tab="Connexion">
+          <p>{{ errorLog }}</p>
+          <form action="" method="get" class="form">
+            <div class="formItem">
+              <label for="email">Entrer votre adresse mail: </label>
+              <input
+                type="email"
+                name="email"
+                id="emailLog"
+                required
+                autofocus
+                autocomplete="email"
+                placeholder="SuperTonAdresse@gmail.com"
+                :value="login.email"
+                @input="handleLoginMail"
+              />
+            </div>
+            <div class="formItem">
+              <label for="pwd">Entrer votre mot de passe: </label>
+              <input
+                type="password"
+                name="password"
+                id="passwordLog"
+                required
+                autofocus
+                placeholder="1A3-45-678"
+                autocomplete="current-password"
+                :value="login.password"
+                @input="handleLoginPwd"
+              />
+            </div>
+            <div class="formItem">
+              <n-button strong type="primary" @click="submitLogin"
+                >Connection !</n-button
+              >
+            </div>
+          </form>
+        </n-tab-pane>
+        <n-tab-pane name="signup" tab="Inscription">
+          <p>{{ errorReg }}</p>
+          <form action="" method="get" class="form">
+            <div class="formItem">
+              <label for="name">Entrer votre nom: </label>
+              <input
+                type="text"
+                name="name"
+                id="name"
+                required
+                autofocus
+                autocomplete="username"
+                placeholder="Karateka Exceptionel"
+                :value="form.name"
+                @input="handleName"
+              />
+            </div>
+            <div class="formItem">
+              <label for="email">Entrer votre adresse mail: </label>
+              <input
+                type="email"
+                name="email"
+                id="email"
+                required
+                autofocus
+                autocomplete="email"
+                placeholder="SuperTonAdresse@gmail.com"
+                :value="form.email"
+                @input="handleMail"
+              />
+            </div>
+            <div class="formItem">
+              <label for="pwd">Entrer votre mot de passe: </label>
+              <input
+                type="password"
+                name="password"
+                id="password"
+                required
+                autofocus
+                placeholder="1A3-45-678"
+                autocomplete="current-password"
+                :value="form.password"
+                @input="handlePwd"
+              />
+            </div>
+            <div class="formItem">
+              <n-button strong type="primary" @click="submitRegister"
+                >Inscription !</n-button
+              >
+            </div>
+          </form>
+        </n-tab-pane>
+      </n-tabs>
+    </n-card>
   </div>
 </template>
 
@@ -102,8 +112,7 @@ import {
   updateProfile,
   signOut,
 } from "firebase/auth";
-import { auth } from "../firebaseModel";
-
+import { auth, addUserFirestore } from "../firebaseModel";
 export default {
   data() {
     return {
@@ -150,6 +159,7 @@ export default {
                 this.form.password
               )
             )
+            .then(() => addUserFirestore(auth.currentUser))
             .then(() => {
               this.$router.push("profile");
             });

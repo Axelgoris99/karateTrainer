@@ -1,7 +1,7 @@
 import firebase from "firebase/compat/app";
 import { getAnalytics, logEvent } from "firebase/analytics";
 import "firebase/compat/storage";
-import { getDatabase, ref, onValue, get } from "firebase/database";
+import { getDatabase, ref, onValue, get, set } from "firebase/database";
 import firebaseConfig from "./firebaseSettings.js";
 import store from "./store/index.js";
 import { getAuth } from "firebase/auth";
@@ -52,13 +52,74 @@ function fetchAllData() {
   });
 }
 
-function updateFirebaseFromModel() {}
-function updateModelFromFirebase() {}
+function addUserFirestore(user) {
+  const mail = user.email.replace(/[^a-zA-Z0-9]/g, "");
+  set(ref(database, "/usersByMail/" + mail + "/id"), user.uid).then(() =>
+    set(ref(database, "/usersByMail/" + mail + "/name"), user.displayName)
+  );
+}
+
+function updateFirebaseFromModel(payload) {
+  let currentUser = getAuth().currentUser;
+  let userId = currentUser.uid;
+  // High Score For Quizz
+  if (payload.highScore) {
+    set(
+      ref(database, "/users/" + userId + "/quizz/highScore"),
+      payload.highScore
+    );
+  }
+  // Number of Question for Quizz
+  if (payload.nbQ) {
+    set(ref(database, "/users/" + userId + "/quizz/nbQ"), payload.nbQ);
+  }
+  // if (payload.characterToRemove) {
+  //   set(
+  //     ref(
+  //       database,
+  //       "/users/" + userId + "/characters/" + payload.characterToRemove.name
+  //     ),
+  //     null
+  //   );
+  // }
+}
+
+function updateModelFromFirebase(store) {
+  let userId = getAuth().currentUser.uid;
+  store;
+  // highScore
+  // onChildAdded(ref(database, "/users/" + userId + "/characters"), (snapshot) =>
+  //   store.dispatch("characters/addChar", snapshot.val())
+  // );
+  // onChildRemoved(
+  //   ref(database, "/users/" + userId + "/characters"),
+  //   (snapshot) => store.dispatch("characters/removeChar", snapshot.val())
+  // );
+
+  // highScore;
+  onValue(
+    ref(database, "/users/" + userId + "/quizz/highScore"),
+    (snapshot) => {
+      if (snapshot.val()) {
+        store.dispatch("quizz/setHighScore", snapshot.val());
+      }
+    }
+  );
+  // Nb Questions Answered Max
+  onValue(ref(database, "/users/" + userId + "/quizz/nbQ"), (snapshot) => {
+    if (snapshot.val()) {
+      console.log(snapshot.val());
+      store.dispatch("quizz/setNbQMax", snapshot.val());
+    }
+  });
+}
+
 export {
   fetchImageUrl,
   fetchSoundUrl,
   fetchAllData,
   updateFirebaseFromModel,
   updateModelFromFirebase,
+  addUserFirestore,
   auth,
 };
