@@ -82,9 +82,12 @@ const router = createRouter({
   routes,
 });
 
-router.beforeEach((to) => {
+router.beforeResolve((to) => {
   if (to.name === "profile" && !store.getters["auth/loggedIn"]) {
     return { name: "login" };
+  }
+  if (to.name === "login" && store.getters["auth/loggedIn"]) {
+    return { name: "profile" };
   }
 });
 export default router;

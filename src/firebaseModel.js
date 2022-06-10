@@ -73,6 +73,9 @@ function updateFirebaseFromModel(payload) {
   if (payload.nbQ) {
     set(ref(database, "/users/" + userId + "/quizz/nbQ"), payload.nbQ);
   }
+  if (payload.lvl) {
+    set(ref(database, "/users/" + userId + "/lvl"), payload.lvl);
+  }
   // if (payload.characterToRemove) {
   //   set(
   //     ref(
@@ -87,14 +90,6 @@ function updateFirebaseFromModel(payload) {
 function updateModelFromFirebase(store) {
   let userId = getAuth().currentUser.uid;
   store;
-  // highScore
-  // onChildAdded(ref(database, "/users/" + userId + "/characters"), (snapshot) =>
-  //   store.dispatch("characters/addChar", snapshot.val())
-  // );
-  // onChildRemoved(
-  //   ref(database, "/users/" + userId + "/characters"),
-  //   (snapshot) => store.dispatch("characters/removeChar", snapshot.val())
-  // );
 
   // highScore;
   onValue(
@@ -105,11 +100,18 @@ function updateModelFromFirebase(store) {
       }
     }
   );
+
   // Nb Questions Answered Max
   onValue(ref(database, "/users/" + userId + "/quizz/nbQ"), (snapshot) => {
     if (snapshot.val()) {
-      console.log(snapshot.val());
       store.dispatch("quizz/setNbQMax", snapshot.val());
+    }
+  });
+
+  //lvl techniques
+  onValue(ref(database, "/users/" + userId + "/lvl"), (snapshot) => {
+    if (snapshot.val()) {
+      store.dispatch("allTechs/setLvl", snapshot.val());
     }
   });
 }

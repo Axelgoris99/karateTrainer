@@ -74,8 +74,8 @@ export default {
       state.count = val;
     },
 
-    SET_LVL(state, val) {
-      state.lvl = val;
+    SET_LVL(state, payload) {
+      state.lvl = payload.lvl;
     },
     SET_HELP_TECH(state, name) {
       state.helpTechValue = name;
@@ -92,7 +92,7 @@ export default {
     },
 
     setLvl({ commit, dispatch }, val) {
-      commit("SET_LVL", val);
+      commit("SET_LVL", { lvl: val });
       commit("SET_TECH_LVL");
       dispatch("combosTechs/setCombosLvl", null, { root: true });
     },
