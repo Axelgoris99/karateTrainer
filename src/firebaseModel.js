@@ -73,7 +73,7 @@ function updateFirebaseFromModel(payload) {
   if (payload.nbQ) {
     set(ref(database, "/users/" + userId + "/quizz/nbQ"), payload.nbQ);
   }
-  if (payload.lvl) {
+  if (payload.lvl > -1) {
     set(ref(database, "/users/" + userId + "/lvl"), payload.lvl);
   }
   // if (payload.characterToRemove) {
@@ -110,7 +110,7 @@ function updateModelFromFirebase(store) {
 
   //lvl techniques
   onValue(ref(database, "/users/" + userId + "/lvl"), (snapshot) => {
-    if (snapshot.val()) {
+    if (snapshot.val() > -1) {
       store.dispatch("allTechs/setLvl", snapshot.val());
     }
   });

@@ -69,5 +69,6 @@ export default {
 .size {
   text-align: center;
   width: 80vw;
+  overflow-x: scroll;
 }
 </style>
