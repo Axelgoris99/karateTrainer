@@ -31,6 +31,7 @@
           :key="e.name"
           :name="e.name"
           :tab="`ㅤ${e.name}ㅤ`"
+          class="over"
         >
           <n-space vertical class="size">
             <span>{{ e.name }} : {{ e.desc }}</span>
@@ -69,6 +70,8 @@ export default {
 .size {
   text-align: center;
   width: 80vw;
-  overflow-x: scroll;
+}
+.over {
+  overflow: scroll;
 }
 </style>
