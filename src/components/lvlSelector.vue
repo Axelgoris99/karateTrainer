@@ -1,6 +1,6 @@
 <template>
   <n-space vertical>
-    <h2>Choix du niveau</h2>
+    <h2>Grade visé</h2>
     <n-slider
       @update:value="changedLvl"
       :marks="marks"

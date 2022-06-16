@@ -48,11 +48,29 @@ export default {
       }
       return arrayOfTechs;
     },
+    deplacements() {
+      var arrayOfTechs = [];
+      for (let [key, value] of Object.entries(this.techniques)) {
+        key;
+        if (key == "deplacements") {
+          for (let [key1, value1] of Object.entries(value)) {
+            key1;
+            arrayOfTechs.push(value1);
+          }
+          return arrayOfTechs;
+        }
+      }
+      return arrayOfTechs;
+    },
     techs() {
       var arrayOfTechs = [];
       for (let [key, value] of Object.entries(this.techniques)) {
         key;
-        if (key != "positions" && !this.restrictions.includes(key)) {
+        if (
+          key !== "positions" &&
+          key !== "deplacements" &&
+          !this.restrictions.includes(key)
+        ) {
           for (let [key1, value1] of Object.entries(value)) {
             key1;
             arrayOfTechs.push(value1);
@@ -73,17 +91,29 @@ export default {
       this.$store.dispatch("selectedTechs/clearTech");
       this.$store.dispatch("selectedTechs/clearTechDesc");
       var sel;
+      var union;
       const fillTechDesc = async () => {
         for (let i = 0; i < this.count; i++) {
           await new Promise((resolve) => {
             if (!this.selected[i] || this.selected[i].length == 0) {
               // If we have no techniques then we won't be able to select one
               // so we say that all of them are still possible
-              if (this.selectList.length == 0) {
-                var union = [...this.techs, ...this.positions];
-                sel = union[Math.floor(Math.random() * union.length)];
-              } else {
-                sel = this.techs[Math.floor(Math.random() * this.techs.length)];
+              switch (this.selectList.length) {
+                case 0:
+                  union = [
+                    ...this.techs,
+                    ...this.positions,
+                    ...this.deplacements,
+                  ];
+                  sel = union[Math.floor(Math.random() * union.length)];
+                  break;
+                case 3:
+                  sel =
+                    this.techs[Math.floor(Math.random() * this.techs.length)];
+                  break;
+                default:
+                  union = [...this.techs, ...this.deplacements];
+                  sel = union[Math.floor(Math.random() * union.length)];
               }
             } else {
               sel =

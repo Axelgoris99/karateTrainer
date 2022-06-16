@@ -18,7 +18,9 @@
       icon-placement="left"
       >Un enchainement</n-button
     >
-    <helpTech v-if="show" @play="playSound" />
+    <div v-if="show" id="help">
+      <helpTech @play="playSound" />
+    </div>
   </div>
 </template>
 
@@ -72,6 +74,20 @@ export default {
         this.$emit("show");
       });
     },
+    /* 
+    Function to scroll to an element that might not be existing on the current page by waiting for the next tick
+    Input: the id of the element we need to scroll to
+    Output: /
+    */
+    async scrollTo(id) {
+      await this.$nextTick();
+      const scroll = document.getElementById(id);
+      scroll.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+        inline: "center",
+      });
+    },
     generate() {
       const promise1 = Promise.resolve();
       promise1
@@ -84,6 +100,7 @@ export default {
         .then(() => {
           this.loading = false;
           this.show = true;
+          this.scrollTo("help");
         });
     },
 

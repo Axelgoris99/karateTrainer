@@ -27,7 +27,11 @@
       <n-divider />
       <nbTech />
       <n-divider />
-      <choiceTech :restrictions="restrictions" :clear="resetTreeSelect" />
+      <choiceTech
+        :restrictions="restrictions"
+        :clear="resetTreeSelect"
+        filter="false"
+      />
       <genRes
         :restrictions="restrictions"
         @show="show"
@@ -35,7 +39,7 @@
         @reset="reset"
         @play="playSound"
       />
-      <div v-if="affiche">
+      <div v-if="affiche" id="help">
         <helpTech @play="playSound" />
       </div>
     </n-space>
@@ -66,8 +70,23 @@ export default {
     }),
   },
   methods: {
+    /* 
+    Function to scroll to an element that might not be existing on the current page by waiting for the next tick
+    Input: the id of the element we need to scroll to
+    Output: /
+    */
+    async scrollTo(id) {
+      await this.$nextTick();
+      const scroll = document.getElementById(id);
+      scroll.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+        inline: "center",
+      });
+    },
     show() {
       this.affiche = true;
+      this.scrollTo("help");
     },
     hide() {
       this.affiche = false;

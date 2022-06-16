@@ -9,7 +9,7 @@
       </template>
       <template #description>
         <!-- <div id="answer" class="scroll"></div> -->
-        <div v-if="next || echec">
+        <div id="answer" v-if="next || echec">
           <n-button
             v-if="next"
             strong
@@ -52,7 +52,7 @@
           <n-divider />
         </div>
         <br />
-        <span id="answer"> Question </span>
+        <span id="question"> Question </span>
         <h2 v-if="questionType === 'name'">
           {{ selected[questionType] }}
         </h2>
@@ -225,7 +225,7 @@ export default {
       if (this.answerType === "sound") {
         this.time = 30;
       } else {
-        this.time = 5;
+        this.time = 20;
       }
     },
 
@@ -257,11 +257,10 @@ export default {
     */
     async scrollTo(id) {
       await this.$nextTick();
-      window.scrollTo({
-        top: document.getElementById(id).offsetTop,
-        left: 0,
+      const scroll = document.getElementById(id);
+      scroll.scrollIntoView({
         behavior: "smooth",
-        block: "center",
+        block: "start",
         inline: "center",
       });
     },
@@ -269,7 +268,7 @@ export default {
       this.score = 0;
       this.nextQuestion();
       this.start = true;
-      this.scrollTo("answer");
+      this.scrollTo("question");
     },
     answer(choice) {
       const comp = this;

@@ -6,6 +6,7 @@
       checkable
       placeholder="Sélectionner les techniques désirées"
       clearable
+      :filterable="filter"
       check-strategy="parent"
       :value="values"
       :options="options"
@@ -21,6 +22,7 @@ export default {
     options: Object,
     number: Number,
     reset: Boolean,
+    filter: Boolean,
   },
   data() {
     return {
