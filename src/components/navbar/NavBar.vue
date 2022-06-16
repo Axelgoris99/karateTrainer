@@ -16,6 +16,10 @@ export default {
           icon: "bi bi-house",
           options: [
             {
+              label: "Kihon en ligne",
+              key: "home",
+            },
+            {
               label: "Kihon Multi-directionnel",
               key: "directional",
             },

@@ -86,7 +86,7 @@ export default {
       this.$router.push("login");
     },
     profilePage() {
-      this.$router.push("profile");
+      this.$router.push("/profile");
     },
   },
 };

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <n-thing v-if="start">
+    <n-thing id="test" v-if="start">
       <template #header>
         <h2>Score : {{ score }}</h2>
       </template>
@@ -225,9 +225,13 @@ export default {
       if (this.answerType === "sound") {
         this.time = 30;
       } else {
-        this.time = 15;
+        this.time = 5;
       }
     },
+
+    /*
+      Gestion du chrono
+    */
     startChrono() {
       const comp = this;
 
@@ -240,13 +244,32 @@ export default {
           comp.correctAnswer = comp.choices.findIndex(
             (element) => element.name == comp.selected.name
           );
+          comp.scrollTo("answer");
+          // comp.answer();
         }
       }, 1000); // update about every second
+    },
+
+    /* 
+    Function to scroll to an element that might not be existing on the current page by waiting for the next tick
+    Input: the id of the element we need to scroll to
+    Output: /
+    */
+    async scrollTo(id) {
+      await this.$nextTick();
+      window.scrollTo({
+        top: document.getElementById(id).offsetTop,
+        left: 0,
+        behavior: "smooth",
+        block: "center",
+        inline: "center",
+      });
     },
     startQuizz() {
       this.score = 0;
       this.nextQuestion();
       this.start = true;
+      this.scrollTo("answer");
     },
     answer(choice) {
       const comp = this;
@@ -266,12 +289,7 @@ export default {
         clearInterval(this.chrono);
         this.echec = true;
       }
-      const answer = document.getElementById("answer");
-      answer.scrollIntoView({
-        behavior: "smooth",
-        block: "center",
-        inline: "center",
-      });
+      this.scrollTo("answer");
     },
     goToLexic() {
       this.$router.push("lexique");
