@@ -1,21 +1,13 @@
 <template>
-  <h2>Choix de techniques spécifiques</h2>
-  <p>
-    Si aucun choix n'est fait pour une case alors une technique aléatoire sera
-    sélectionné
-  </p>
-  <div v-for="n in count" :key="n">
-    <span>Technique n°{{ n }}</span>
-    <treeSelect
-      :options="options"
-      :number="n - 1"
-      :reset="clear"
-      :filter="filter"
-      placeholder="Sélectionner les techniques"
-      :multiple="true"
-      @updateValue="updateValue"
-    ></treeSelect>
-  </div>
+  <treeSelect
+    :options="options"
+    :number="n - 1"
+    :reset="clear"
+    :filter="filter"
+    placeholder="Sélectionner la technique"
+    :multiple="false"
+    @updateValue="updateValue"
+  ></treeSelect>
 </template>
 <script>
 import treeSelect from "../components/treeSelect.vue";
@@ -34,7 +26,6 @@ export default {
   computed: {
     ...mapGetters({
       techniques: "allTechs/techniquesLvl",
-      count: "allTechs/nbTech",
     }),
     options() {
       var types = [];
@@ -53,8 +44,8 @@ export default {
   },
   methods: {
     updateValue(value, numberTree) {
-      var obj = { value, numberTree };
-      this.$store.dispatch("selectedTechs/setSelected", obj);
+      value;
+      numberTree;
     },
   },
 };

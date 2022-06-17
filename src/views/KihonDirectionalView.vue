@@ -30,8 +30,9 @@
       <choiceTech
         :restrictions="restrictions"
         :clear="resetTreeSelect"
-        filter="false"
+        :filter="true"
       />
+      <n-divider />
       <genRes
         :restrictions="restrictions"
         @show="show"
@@ -56,7 +57,13 @@ import { mapGetters } from "vuex";
 
 export default {
   name: "directionalView",
-  components: { nbTech, choiceTech, genRes, helpTech, lvlSelector },
+  components: {
+    nbTech,
+    choiceTech,
+    genRes,
+    helpTech,
+    lvlSelector,
+  },
   data() {
     return {
       affiche: false,

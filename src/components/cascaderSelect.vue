@@ -1,10 +1,9 @@
 <template>
   <n-space vertical>
-    <n-tree-select
-      :multiple="multiple"
+    <n-cascader
+      multiple
       cascade
-      checkable
-      :placeholder="placeholder"
+      placeholder="Sélectionner les techniques désirées"
       clearable
       :filterable="filter"
       check-strategy="parent"
@@ -17,14 +16,12 @@
 
 <script>
 export default {
-  name: "techniqueComp",
+  name: "cascaderTechs",
   props: {
     options: Object,
     number: Number,
     reset: Boolean,
     filter: Boolean,
-    placeholder: String,
-    multiple: Boolean,
   },
   data() {
     return {

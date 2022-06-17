@@ -6,23 +6,21 @@
   </p>
   <div v-for="n in count" :key="n">
     <span>Technique n°{{ n }}</span>
-    <treeSelect
+    <cascaderSelect
       :options="options"
       :number="n - 1"
       :reset="clear"
       :filter="filter"
-      placeholder="Sélectionner les techniques"
-      :multiple="true"
       @updateValue="updateValue"
-    ></treeSelect>
+    ></cascaderSelect>
   </div>
 </template>
 <script>
-import treeSelect from "../components/treeSelect.vue";
+import cascaderSelect from "../components/cascaderSelect.vue";
 import { mapGetters } from "vuex";
 export default {
   name: "choiceTech",
-  components: { treeSelect },
+  components: { cascaderSelect },
   props: {
     restrictions: Array,
     clear: Boolean,
@@ -42,9 +40,13 @@ export default {
         if (!this.restrictions.includes(key)) {
           var children = [];
           for (let [key1, value1] of Object.entries(value)) {
-            children.push({ label: value1.name, key: key1 });
+            children.push({ label: value1.name, value: key1 });
           }
-          var tree = { label: key.toUpperCase(), key: key, children: children };
+          var tree = {
+            label: key.toUpperCase(),
+            value: key,
+            children: children,
+          };
           types.push(tree);
         }
       }

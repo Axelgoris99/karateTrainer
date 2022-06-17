@@ -20,7 +20,7 @@
       <choiceTech
         :restrictions="restrictions"
         :clear="resetTreeSelect"
-        filter="false"
+        :filter="true"
       />
       <genRes
         :restrictions="restrictions"
