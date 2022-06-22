@@ -1,6 +1,6 @@
 import store from "../../store/index";
 import convertLvl from "./convertLvl";
-const grades = ["blanc", "jaune", "orange", "vert", "bleu", "marron", "noir"];
+const grades = ["jaune", "orange", "vert", "bleu", "marron", "noir", "noir+"];
 function getList(name) {
   var obj = store.getters["allTechs/sameTypeOfTechs"](name);
   var array = [];

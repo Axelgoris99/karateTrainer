@@ -66,7 +66,7 @@ export default {
   components: {},
   data() {
     return {
-      grades: ["blanc", "jaune", "orange", "vert", "bleu", "marron", "noir"],
+      grades: ["jaune", "orange", "vert", "bleu", "marron", "noir", "noir+"],
       techs: {},
     };
   },

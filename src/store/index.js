@@ -4,8 +4,16 @@ import allTechs from "./modules/allTechs";
 import selectedTechs from "./modules/selectedTechs";
 import quizz from "./modules/quizz";
 import auth from "./modules/auth";
+import kihonIpponTechs from "./modules/kihonIpponTechs";
 
 export default createStore({
   strict: process.env.NODE_ENV !== "production",
-  modules: { combosTechs, allTechs, selectedTechs, quizz, auth },
+  modules: {
+    combosTechs,
+    allTechs,
+    selectedTechs,
+    quizz,
+    auth,
+    kihonIpponTechs,
+  },
 });

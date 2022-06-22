@@ -1,7 +1,7 @@
 <template>
   <treeSelect
     :options="options"
-    :number="n - 1"
+    :number="0"
     :reset="clear"
     :filter="filter"
     placeholder="Sélectionner la technique"
@@ -13,12 +13,15 @@
 import treeSelect from "../components/treeSelect.vue";
 import { mapGetters } from "vuex";
 export default {
-  name: "choiceTech",
+  name: "choiceKihonIppon",
   components: { treeSelect },
   props: {
     restrictions: Array,
     clear: Boolean,
     filter: Boolean,
+    right: Boolean,
+    def: Boolean,
+    name: String,
   },
   data() {
     return {};
@@ -43,9 +46,27 @@ export default {
     },
   },
   methods: {
-    updateValue(value, numberTree) {
+    updateValue(value) {
       value;
-      numberTree;
+      switch (this.right) {
+        case true:
+          switch (this.def) {
+            case true:
+              this.$store.dispatch("kihonIpponTechs/setRight", value);
+              break;
+            case false:
+              break;
+          }
+          break;
+        case false:
+          switch (this.def) {
+            case true:
+              break;
+            case false:
+              break;
+          }
+          break;
+      }
     },
   },
 };

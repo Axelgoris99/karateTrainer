@@ -20,13 +20,13 @@ export default {
   data() {
     return {
       marks: {
-        0: "Blanc",
-        1: "Jaune",
-        2: "Orange",
-        3: "Vert",
-        4: "Bleu",
-        5: "Marron",
-        6: "Noir",
+        0: "Jaune",
+        1: "Orange",
+        2: "Vert",
+        3: "Bleu",
+        4: "Marron",
+        5: "Noir",
+        6: "Noir+",
       },
     };
   },

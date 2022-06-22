@@ -26,14 +26,20 @@
               <choiceKihonIppon
                 :restrictions="restrictionsDef"
                 :clear="resetTreeSelect"
-                filter="true"
+                :right="true"
+                :def="true"
+                :filter="true"
+                :name="t.name"
               />
             </n-gi>
             <n-gi>
               <choiceKihonIppon
                 :restrictions="restrictionsAtk"
                 :clear="resetTreeSelect"
-                filter="true"
+                :right="true"
+                :def="false"
+                :filter="true"
+                :name="t.name"
               />
             </n-gi>
           </n-grid>
@@ -58,14 +64,20 @@
               <choiceKihonIppon
                 :restrictions="restrictionsDef"
                 :clear="resetTreeSelect"
-                filter="true"
+                :right="false"
+                :def="true"
+                :filter="true"
+                :name="t.name"
               />
             </n-gi>
             <n-gi>
               <choiceKihonIppon
                 :restrictions="restrictionsAtk"
                 :clear="resetTreeSelect"
-                filter="true"
+                :right="false"
+                :def="false"
+                :filter="true"
+                :name="t.name"
               />
             </n-gi>
           </n-grid>
@@ -92,6 +104,7 @@ export default {
     ...mapGetters({
       techniques: "allTechs/techniques",
     }),
+
     techs() {
       let options = ["Mae-geri", "Mawashi-geri", "Yoko-geri"];
       let techs = {};
