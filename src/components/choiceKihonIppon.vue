@@ -7,10 +7,11 @@
     placeholder="Sélectionner la technique"
     :multiple="false"
     @updateValue="updateValue"
+    :defaultValue="tech"
   ></treeSelect>
 </template>
 <script>
-import treeSelect from "../components/treeSelect.vue";
+import treeSelect from "../components/IpponTreeSelect.vue";
 import { mapGetters } from "vuex";
 export default {
   name: "choiceKihonIppon",
@@ -23,13 +24,17 @@ export default {
     def: Boolean,
     name: String,
   },
-  data() {
-    return {};
-  },
   computed: {
     ...mapGetters({
       techniques: "allTechs/techniquesLvl",
     }),
+    tech() {
+      return this.$store.getters["kihonIpponTechs/tech"](
+        this.name,
+        this.right,
+        this.def
+      );
+    },
     options() {
       var types = [];
       for (let [key, value] of Object.entries(this.techniques)) {
@@ -47,22 +52,25 @@ export default {
   },
   methods: {
     updateValue(value) {
-      value;
+      let obj = { name: this.name, value: value };
       switch (this.right) {
         case true:
           switch (this.def) {
             case true:
-              this.$store.dispatch("kihonIpponTechs/setRight", value);
+              this.$store.dispatch("kihonIpponTechs/setRightDef", obj);
               break;
             case false:
+              this.$store.dispatch("kihonIpponTechs/setRightAtk", obj);
               break;
           }
           break;
         case false:
           switch (this.def) {
             case true:
+              this.$store.dispatch("kihonIpponTechs/setLeftDef", obj);
               break;
             case false:
+              this.$store.dispatch("kihonIpponTechs/setLeftAtk", obj);
               break;
           }
           break;
