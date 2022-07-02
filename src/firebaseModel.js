@@ -93,40 +93,18 @@ function updateFirebaseFromModel(payload) {
       payload.highScore
     );
   }
-  if (payload.rightAtk) {
+  if (payload.kihonIppon) {
     set(
       ref(
         database,
-        "/users/" + userId + "/kihonIppon/RightAtk/" + payload.rightAtk.name
+        "/users/" +
+          userId +
+          "/kihonIppon/" +
+          payload.kihonIppon.sideAndType +
+          "/" +
+          payload.kihonIppon.name
       ),
-      payload.rightAtk.value
-    );
-  }
-  if (payload.leftAtk) {
-    set(
-      ref(
-        database,
-        "/users/" + userId + "/kihonIppon/LeftAtk/" + payload.leftAtk.name
-      ),
-      payload.leftAtk.value
-    );
-  }
-  if (payload.rightDef) {
-    set(
-      ref(
-        database,
-        "/users/" + userId + "/kihonIppon/RightDef/" + payload.rightDef.name
-      ),
-      payload.rightDef.value
-    );
-  }
-  if (payload.leftDef) {
-    set(
-      ref(
-        database,
-        "/users/" + userId + "/kihonIppon/LeftDef/" + payload.leftDef.name
-      ),
-      payload.leftDef.value
+      payload.kihonIppon.value
     );
   }
 }

@@ -52,29 +52,23 @@ export default {
   },
   methods: {
     updateValue(value) {
-      let obj = { name: this.name, value: value };
-      switch (this.right) {
-        case true:
-          switch (this.def) {
-            case true:
-              this.$store.dispatch("kihonIpponTechs/setRightDef", obj);
-              break;
-            case false:
-              this.$store.dispatch("kihonIpponTechs/setRightAtk", obj);
-              break;
-          }
-          break;
-        case false:
-          switch (this.def) {
-            case true:
-              this.$store.dispatch("kihonIpponTechs/setLeftDef", obj);
-              break;
-            case false:
-              this.$store.dispatch("kihonIpponTechs/setLeftAtk", obj);
-              break;
-          }
-          break;
+      let sideAndType;
+      if (this.right) {
+        sideAndType = "Right";
+      } else {
+        sideAndType = "Left";
       }
+      if (this.def) {
+        sideAndType = sideAndType + "Def";
+      } else {
+        sideAndType = sideAndType + "Atk";
+      }
+      let obj = {
+        name: this.name,
+        value: value,
+        sideAndType: sideAndType,
+      };
+      this.$store.dispatch("kihonIpponTechs/setTech", obj);
     },
   },
 };
