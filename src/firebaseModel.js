@@ -85,6 +85,14 @@ function updateFirebaseFromModel(payload) {
   //     null
   //   );
   // }
+
+  // Techs from Kihon Ippon Kumite
+  if (payload.highScore) {
+    set(
+      ref(database, "/users/" + userId + "/quizz/highScore"),
+      payload.highScore
+    );
+  }
 }
 
 function updateModelFromFirebase(store) {
@@ -112,6 +120,13 @@ function updateModelFromFirebase(store) {
   onValue(ref(database, "/users/" + userId + "/lvl"), (snapshot) => {
     if (snapshot.val() > -1) {
       store.dispatch("allTechs/setLvl", snapshot.val());
+    }
+  });
+
+  // Kihon Ippon Kumite Techniques
+  onValue(ref(database, "/users/" + userId + "/kihonIppon"), (snapshot) => {
+    if (snapshot.val()) {
+      store.dispatch("kihonIpponTechs/setTechs", snapshot.val());
     }
   });
 }

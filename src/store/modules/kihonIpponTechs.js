@@ -73,5 +73,15 @@ export default {
     setLeftDef({ commit }, obj) {
       commit("SET_LEFT_DEF", obj);
     },
+
+    setTechs({ dispatch }, val) {
+      for (let [key, value] of Object.entries(val)) {
+        for (let [key2, value2] of Object.entries(value)) {
+          let str = "set" + key;
+          let obj = { name: key2, value: value2 };
+          dispatch(str, obj);
+        }
+      }
+    },
   },
 };
