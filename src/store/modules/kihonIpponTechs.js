@@ -48,30 +48,30 @@ export default {
   },
   mutations: {
     SET_RIGHT_ATK(state, obj) {
-      state.rightAtk[obj.name] = obj.value;
+      state.rightAtk[obj.rightAtk.name] = obj.rightAtk.value;
     },
     SET_RIGHT_DEF(state, obj) {
-      state.rightDef[obj.name] = obj.value;
+      state.rightDef[obj.rightDef.name] = obj.rightDef.value;
     },
     SET_LEFT_ATK(state, obj) {
-      state.leftATk[obj.name] = obj.value;
+      state.leftATk[obj.leftAtk.name] = obj.leftAtk.value;
     },
     SET_LEFT_DEF(state, obj) {
-      state.leftDef[obj.name] = obj.value;
+      state.leftDef[obj.leftDef.name] = obj.leftDef.value;
     },
   },
   actions: {
     setRightAtk({ commit }, obj) {
-      commit("SET_RIGHT_ATK", obj);
+      commit("SET_RIGHT_ATK", { rightAtk: obj });
     },
     setLeftAtk({ commit }, obj) {
-      commit("SET_LEFT_ATK", obj);
+      commit("SET_LEFT_ATK", { leftAtk: obj });
     },
     setRightDef({ commit }, obj) {
-      commit("SET_RIGHT_DEF", obj);
+      commit("SET_RIGHT_DEF", { rightDef: obj });
     },
     setLeftDef({ commit }, obj) {
-      commit("SET_LEFT_DEF", obj);
+      commit("SET_LEFT_DEF", { leftDef: obj });
     },
 
     setTechs({ dispatch }, val) {

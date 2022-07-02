@@ -93,6 +93,42 @@ function updateFirebaseFromModel(payload) {
       payload.highScore
     );
   }
+  if (payload.rightAtk) {
+    set(
+      ref(
+        database,
+        "/users/" + userId + "/kihonIppon/RightAtk/" + payload.rightAtk.name
+      ),
+      payload.rightAtk.value
+    );
+  }
+  if (payload.leftAtk) {
+    set(
+      ref(
+        database,
+        "/users/" + userId + "/kihonIppon/LeftAtk/" + payload.leftAtk.name
+      ),
+      payload.leftAtk.value
+    );
+  }
+  if (payload.rightDef) {
+    set(
+      ref(
+        database,
+        "/users/" + userId + "/kihonIppon/RightDef/" + payload.rightDef.name
+      ),
+      payload.rightDef.value
+    );
+  }
+  if (payload.leftDef) {
+    set(
+      ref(
+        database,
+        "/users/" + userId + "/kihonIppon/LeftDef/" + payload.leftDef.name
+      ),
+      payload.leftDef.value
+    );
+  }
 }
 
 function updateModelFromFirebase(store) {
