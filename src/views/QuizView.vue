@@ -13,6 +13,8 @@
       </p>
     </div>
     <n-divider />
+    <palmaresComp />
+    <n-divider />
     <h3>Max de questions répondues : {{ nbQMax }}</h3>
     <h3>Meilleur score : {{ highScore }}</h3>
     <n-divider />
@@ -26,9 +28,10 @@
 import lvlSelector from "../components/lvlSelector.vue";
 import quizzComp from "../components/quizzComp.vue";
 import { mapGetters } from "vuex";
+import palmaresComp from "../components/palmaresComp.vue";
 export default {
   name: "quizView",
-  components: { lvlSelector, quizzComp },
+  components: { lvlSelector, quizzComp, palmaresComp },
   computed: {
     ...mapGetters({
       highScore: "quizz/highScore",

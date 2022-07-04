@@ -16,6 +16,9 @@ export default {
     loggedIn(state) {
       return state.user.loggedIn;
     },
+    name(state) {
+      return state.user.data.displayName;
+    },
   },
   mutations: {
     SET_LOGGED_IN(state, value) {

@@ -50,6 +50,11 @@ function fetchAllData() {
       store.dispatch("combosTechs/setCombos", snapshot.val());
     }
   });
+  onValue(ref(database, "/palmares"), (snapshot) => {
+    if (snapshot.val()) {
+      store.dispatch("quizz/setPalmares", snapshot.val());
+    }
+  });
 }
 
 function addUserFirestore(user) {
@@ -106,6 +111,9 @@ function updateFirebaseFromModel(payload) {
       ),
       payload.kihonIppon.value
     );
+  }
+  if (payload.palmares) {
+    set(ref(database, "/palmares"), payload.palmares);
   }
 }
 
